@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkadmin_panel=self.webpackChunkadmin_panel||[]).push([[611],{4611:function(e,n,a){a.r(n);a(2791);var u=a(184);n.default=function(){return(0,u.jsx)("div",{children:"TablePage"})}}}]);
+//# sourceMappingURL=611.12759cc8.chunk.js.map
