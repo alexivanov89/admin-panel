@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/admin-panel/static/css/main.fe43c079.css",
-    "main.js": "/admin-panel/static/js/main.cb275f75.js",
-    "static/css/713.455f2f56.chunk.css": "/admin-panel/static/css/713.455f2f56.chunk.css",
-    "static/js/713.f997c83a.chunk.js": "/admin-panel/static/js/713.f997c83a.chunk.js",
+    "main.js": "/admin-panel/static/js/main.d200e3f3.js",
+    "static/css/713.cf5435ff.chunk.css": "/admin-panel/static/css/713.cf5435ff.chunk.css",
+    "static/js/713.5ce00256.chunk.js": "/admin-panel/static/js/713.5ce00256.chunk.js",
     "static/js/611.12759cc8.chunk.js": "/admin-panel/static/js/611.12759cc8.chunk.js",
     "static/js/515.d0c9bcff.chunk.js": "/admin-panel/static/js/515.d0c9bcff.chunk.js",
     "static/media/Helvetica-Oblique.eot": "/admin-panel/static/media/Helvetica-Oblique.08605b1aec20e3ecb4ef.eot",
@@ -67,16 +67,16 @@
     "static/media/Robotothin.woff2": "/admin-panel/static/media/Robotothin.30581100ea069d04b86a.woff2",
     "static/media/Helvetica-LightOblique.woff2": "/admin-panel/static/media/Helvetica-LightOblique.01f4c5b00e0d4569b5ac.woff2",
     "index.html": "/admin-panel/index.html",
-    "static/media/logo.svg": "/admin-panel/static/media/logo.bc4f3ee8fbfa2ba0ccc054519f06dc93.svg",
+    "static/media/logo.svg": "/admin-panel/static/media/logo.42a15795474b2ec8ad536f6486b148a2.svg",
     "main.fe43c079.css.map": "/admin-panel/static/css/main.fe43c079.css.map",
-    "main.cb275f75.js.map": "/admin-panel/static/js/main.cb275f75.js.map",
-    "713.455f2f56.chunk.css.map": "/admin-panel/static/css/713.455f2f56.chunk.css.map",
-    "713.f997c83a.chunk.js.map": "/admin-panel/static/js/713.f997c83a.chunk.js.map",
+    "main.d200e3f3.js.map": "/admin-panel/static/js/main.d200e3f3.js.map",
+    "713.cf5435ff.chunk.css.map": "/admin-panel/static/css/713.cf5435ff.chunk.css.map",
+    "713.5ce00256.chunk.js.map": "/admin-panel/static/js/713.5ce00256.chunk.js.map",
     "611.12759cc8.chunk.js.map": "/admin-panel/static/js/611.12759cc8.chunk.js.map",
     "515.d0c9bcff.chunk.js.map": "/admin-panel/static/js/515.d0c9bcff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fe43c079.css",
-    "static/js/main.cb275f75.js"
+    "static/js/main.d200e3f3.js"
   ]
 }
