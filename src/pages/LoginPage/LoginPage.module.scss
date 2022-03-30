@@ -95,6 +95,10 @@
           padding: 0;
         }
       }
+
+      [class*="ant-input-affix-wrapper-status-error"] {
+        border: 0.5px solid #ff4d4f;
+      }
     }
 
     .accessBtn {
