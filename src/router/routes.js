@@ -5,7 +5,7 @@ const TablePage = lazy(() => import('../pages/TablePage/TablePage'));
 
 export const routePaths = {
   loginPage: '/',
-  tablePage: '/table',
+  tablePage: '/admin',
 };
 
 export const publicRoutes = [

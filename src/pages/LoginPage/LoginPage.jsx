@@ -1,12 +1,17 @@
 import { Form, Input, Button, Row, Col, Typography } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { Logo } from '../../assets/img';
+import { login } from '../../store/slices/authSlice';
 import styles from './LoginPage.module.scss';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const { errorAuth } = useSelector(({ auth }) => auth);
   const { Text, Title } = Typography;
-  const onFinish = (values) => {};
 
-  const onFinishFailed = (errorInfo) => {};
+  const onFinish = (values) => {
+    dispatch(login(values));
+  };
 
   return (
     <div className={styles.login}>
@@ -26,13 +31,12 @@ const LoginPage = () => {
               remember: true,
             }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
             requiredMark="optional"
           >
             <Form.Item
               label="Почта"
-              name="email"
+              name="username"
               rules={[
                 {
                   required: true,
@@ -40,6 +44,10 @@ const LoginPage = () => {
                 },
               ]}
               className={styles.formItem}
+              {...(errorAuth && {
+                help: errorAuth,
+                validateStatus: 'error',
+              })}
             >
               <Input />
             </Form.Item>
@@ -54,6 +62,10 @@ const LoginPage = () => {
                 },
               ]}
               className={styles.formItem}
+              {...(errorAuth && {
+                help: errorAuth,
+                validateStatus: 'error',
+              })}
             >
               <Input.Password />
             </Form.Item>
