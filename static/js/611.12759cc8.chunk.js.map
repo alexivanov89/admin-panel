@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/611.12759cc8.chunk.js","mappings":"2IAMA,UAJkB,WAChB,OAAO","sources":["pages/TablePage/TablePage.jsx"],"sourcesContent":["import React from 'react';\r\n\r\nconst TablePage = () => {\r\n  return <div>TablePage</div>;\r\n};\r\n\r\nexport default TablePage;\r\n"],"names":[],"sourceRoot":""}
