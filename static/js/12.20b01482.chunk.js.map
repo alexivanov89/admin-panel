@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/12.20b01482.chunk.js","mappings":"kIAIA,UAJe,WACb,OAAO","sources":["components/Orders/Orders.jsx"],"sourcesContent":["const Orders = () => {\n  return <div>Orders</div>;\n};\n\nexport default Orders;\n"],"names":[],"sourceRoot":""}
