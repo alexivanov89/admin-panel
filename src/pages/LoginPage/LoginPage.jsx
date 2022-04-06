@@ -1,6 +1,6 @@
 import { Form, Input, Button, Row, Col, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { Logo } from '../../assets/img';
+import { Logo } from '../../assets/icon';
 import { login } from '../../store/slices/authSlice';
 import styles from './LoginPage.module.scss';
 
@@ -31,7 +31,7 @@ const LoginPage = () => {
               remember: true,
             }}
             onFinish={onFinish}
-            autoComplete="off"
+            autoComplete="on"
             requiredMark="optional"
           >
             <Form.Item

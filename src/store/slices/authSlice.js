@@ -3,6 +3,7 @@ import { authService } from '../../services/authService';
 
 const initialState = {
   isAuth: false,
+  accessToken: null,
   user: {
     username: null,
     password: null,
@@ -25,6 +26,9 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.errorAuth = null;
     },
+    setAccessToken: (state, action) => {
+      state.accessToken = action.payload;
+    },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
       state.errorAuth = null;
@@ -43,11 +47,12 @@ export const login = (values) => async (dispatch) => {
     const response = await authService.login(values);
     dispatch(setIsAuth(true));
     dispatch(setUser(values));
+    dispatch(setAccessToken(response.data.access_token));
   } catch (e) {
     dispatch(setErrorAuth('Некорректный логин или пароль'));
   }
 };
 
-export const { setIsAuth, setUser, setIsLoading, setErrorAuth } = authSlice.actions;
+export const { setIsAuth, setUser, setIsLoading, setErrorAuth, setAccessToken } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

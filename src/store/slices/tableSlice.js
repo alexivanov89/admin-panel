@@ -28,6 +28,11 @@ const initialState = {
     loading: false,
     error: false,
   },
+  order: {
+    orders: [],
+    loading: false,
+    error: false,
+  },
 };
 
 export const fetchCityAsync = createAsyncThunk('table/fetchCity', async () => {
@@ -52,6 +57,17 @@ export const fetchCategoryAsync = createAsyncThunk('table/fetchCategory', async 
 
 export const fetchRateAsync = createAsyncThunk('table/fetchRate', async () => {
   const response = await tableService.getRate();
+  return response.data.data;
+});
+
+export const fetchOrdersAsync = createAsyncThunk('table/fetchOrders', async (options, thunkAPI) => {
+  const { auth } = thunkAPI.getState();
+  const { accessToken } = auth;
+
+  const response = await tableService.getOrder(options, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
   return response.data.data;
 });
 
@@ -129,6 +145,19 @@ const tableSlice = createSlice({
       .addCase(fetchRateAsync.rejected, (state, action) => {
         state.rate.error = action.error;
         state.rate.loading = false;
+      })
+      .addCase(fetchOrdersAsync.pending, (state) => {
+        state.order.loading = true;
+        state.order.error = false;
+      })
+      .addCase(fetchOrdersAsync.fulfilled, (state, action) => {
+        state.order.loading = false;
+        state.order.error = false;
+        state.order.orders = action.payload;
+      })
+      .addCase(fetchOrdersAsync.rejected, (state, action) => {
+        state.order.error = action.error;
+        state.order.loading = false;
       });
   },
 });
