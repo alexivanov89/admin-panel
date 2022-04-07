@@ -112,8 +112,9 @@ const MainPage = () => {
         <Header>
           <Row align="middle" style={{ height: '100%' }}>
             <Col
-              xs={{ span: 15, offset: 1 }}
-              xl={{ span: 16, offset: 0 }}
+              xs={{ span: 8, offset: 2 }}
+              sm={{ span: 11, offset: 1 }}
+              xl={{ span: 12, offset: 0 }}
               style={{ height: '100%', display: 'flex', alignItems: 'center' }}
             >
               <Input
@@ -125,7 +126,8 @@ const MainPage = () => {
               />
             </Col>
             <Col
-              span={8}
+              xs={14}
+              sm={12}
               style={{
                 height: '100%',
                 display: 'flex',
@@ -176,9 +178,9 @@ const MainPage = () => {
             </Switch>
           </ErrorBoundary>
         </Content>
-        <Footer>
+        <Footer className={styles.footer}>
           <Row align="middle" style={{ height: '100%' }}>
-            <Col span={8}>
+            <Col xs={12} sm={16}>
               <Space size={16}>
                 <Link
                   href="https://alexivanov89.github.io/carsharing-app/"
@@ -192,7 +194,7 @@ const MainPage = () => {
                 </Link>
               </Space>
             </Col>
-            <Col span={8} offset={8} style={{ textAlign: 'end' }} className={styles.copyright}>
+            <Col xs={12} sm={8} style={{ textAlign: 'end' }} className={styles.copyright}>
               Copyright © 2020 Simbirsoft
             </Col>
           </Row>

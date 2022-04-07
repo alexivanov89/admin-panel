@@ -44,12 +44,22 @@
   font-size: 15px;
   line-height: 16px;
   color: #818ea3;
+
+  @media screen and (max-width: 479px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
 }
 
 .link {
   font-weight: 400;
   font-size: 15px;
   line-height: 16px;
+
+  @media screen and (max-width: 479px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
 }
 
 .verticalDivider {
@@ -82,8 +92,18 @@
   letter-spacing: -0.471429px;
   color: #5a6169;
 
+  @media screen and (max-width: 479px) {
+    width: 100%;
+  }
+
   & svg {
     fill: #abb6bf;
+  }
+}
+
+.footer {
+  @media screen and (max-width: 479px) {
+    padding: 0px 8px;
   }
 }
 

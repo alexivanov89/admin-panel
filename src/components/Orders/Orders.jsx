@@ -90,22 +90,17 @@ const Orders = () => {
       render: (orderInfo) => (
         <div className={styles.orderInfo}>
           <div>
-            <Text strong className={styles.pointName}>{`${orderInfo?.pointId?.name}`}</Text>
-            <Text type="secondary" className={styles.info}>{` в `}</Text>
-            <Text strong className={styles.city}>{`${orderInfo?.cityId?.name}, `}</Text>
-            <Text
-              type="secondary"
-              className={styles.pointAddress}
-            >{`${orderInfo?.pointId?.address}`}</Text>
+            <Text className={styles.pointName}>{`${orderInfo?.pointId?.name}`}</Text>
+            <Text className={styles.info}>{` в `}</Text>
+            <Text className={styles.city}>{`${orderInfo?.cityId?.name}, `}</Text>
+            <Text className={styles.pointAddress}>{`${orderInfo?.pointId?.address}`}</Text>
           </div>
-          <Text type="secondary" className={styles.dates}>{`${orderInfo?.dateFrom} `}</Text>
-          <Text type="secondary" className={styles.info}>
-            &mdash;
-          </Text>
-          <Text type="secondary" className={styles.dates}>{` ${orderInfo?.dateTo}`}</Text>
+          <Text className={styles.dates}>{`${orderInfo?.dateFrom} `}</Text>
+          <Text className={styles.info}>&mdash;</Text>
+          <Text className={styles.dates}>{` ${orderInfo?.dateTo}`}</Text>
           <div>
-            <Text type="secondary" className={styles.info}>{`Цвет: `}</Text>
-            <Text strong className={styles.color}>{`${orderInfo?.color}`}</Text>
+            <Text className={styles.info}>{`Цвет: `}</Text>
+            <Text className={styles.color}>{`${orderInfo?.color}`}</Text>
           </div>
         </div>
       ),
@@ -202,11 +197,10 @@ const Orders = () => {
         title={
           <div>
             <Row>
-              <Col span={20}>
+              <Col xs={18} sm={20}>
                 <Space size={[15, 15]} wrap>
                   <Select
                     showSearch
-                    style={{ width: 110 }}
                     placeholder="Период"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
@@ -223,7 +217,6 @@ const Orders = () => {
                   </Select>
                   <Select
                     showSearch
-                    style={{ width: 110 }}
                     placeholder="Пункт выдачи"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
@@ -240,7 +233,6 @@ const Orders = () => {
                   </Select>
                   <Select
                     showSearch
-                    style={{ width: 110 }}
                     placeholder="Город"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
@@ -257,7 +249,6 @@ const Orders = () => {
                   </Select>
                   <Select
                     showSearch
-                    style={{ width: 110 }}
                     placeholder="Статус"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
@@ -275,7 +266,7 @@ const Orders = () => {
                   </Select>
                 </Space>
               </Col>
-              <Col span={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Col xs={6} sm={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button type="primary" className={styles.filterBtn}>
                   Применить
                 </Button>
@@ -284,7 +275,6 @@ const Orders = () => {
           </div>
         }
         bordered={false}
-        style={{ width: '100%', minHeight: 386 }}
         className={styles.card}
         bodyStyle={{ padding: '1px 0px 0px' }}
       >

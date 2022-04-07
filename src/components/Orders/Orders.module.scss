@@ -1,10 +1,25 @@
 .title {
+  @media screen and (max-width: 479px) {
+    margin-bottom: 8px !important;
+  }
 }
 .card {
   background: #ffffff;
   box-shadow: 0px 2px 0px rgba(90, 97, 105, 0.11), 0px 4px 8px rgba(90, 97, 105, 0.12),
     0px 10px 10px rgba(90, 97, 105, 0.06), 0px 7px 70px rgba(90, 97, 105, 0.1);
   border-radius: 9px;
+  width: 100%;
+  min-height: 386px;
+
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    min-height: unset;
+  }
+
+  & [class$="ant-card-head"] {
+    @media screen and (max-width: 479px) {
+      padding: 0px 8px;
+    }
+  }
 }
 
 .table {
@@ -12,16 +27,28 @@
     height: 267px;
     vertical-align: top;
 
+    @media screen and (orientation: landscape) and (max-height: 600px) {
+      height: unset;
+    }
+
     td {
       padding: 16px 8px;
     }
 
     & td:first-child {
       padding-left: 24px;
+
+      @media screen and (max-width: 479px) {
+        padding-left: 8px;
+      }
     }
 
     & td:last-child {
       padding-right: 24px;
+
+      @media screen and (max-width: 479px) {
+        padding-right: 8px;
+      }
     }
 
     &:hover {
@@ -50,8 +77,9 @@
 .color {
   font-family: "Roboto";
   font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.408571px;
   color: #121212;
 }
 
@@ -60,8 +88,9 @@
 .dates {
   font-family: "Roboto";
   font-weight: 400;
-  font-size: 12px;
-  line-height: 12px;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.408571px;
   color: #868e96;
   white-space: nowrap;
 }
@@ -136,6 +165,11 @@
   line-height: 13px;
   letter-spacing: -0.345714px;
   color: #868e96;
+  width: 110px;
+
+  @media screen and (max-width: 479px) {
+    width: 90px;
+  }
 
   & [class$="ant-select-selector"] {
     border: 0.5px solid #becad6 !important;

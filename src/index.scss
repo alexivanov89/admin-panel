@@ -50,6 +50,14 @@ img {
 .ant-layout-content {
   background: #f5f6f8;
   padding: 28px 25px 28px 32px;
+
+  @media screen and (max-width: 479px) {
+    padding: 8px;
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    padding: 8px;
+  }
 }
 
 .ant-layout-sider-zero-width-trigger {
@@ -69,11 +77,19 @@ img {
 .ant-layout-header {
   height: 67.5px;
   padding: 0px 22.5px 0px 28px;
+
+  @media screen and (max-width: 479px) {
+    padding: 0px 8px;
+  }
 }
 
 .ant-layout-footer {
   height: 68.5px;
   padding: 0px 27.5px;
+
+  @media screen and (max-width: 1199px) {
+    padding: 0px 56px;
+  }
 }
 
 .ant-menu-item {
@@ -83,6 +99,10 @@ img {
 
   &:hover svg {
     fill: #007bff !important;
+  }
+
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    height: 37px !important;
   }
 }
 
@@ -127,6 +147,12 @@ h1.ant-typography {
   letter-spacing: -0.725px;
   margin-bottom: 28px;
   color: #3d5170;
+
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    margin-bottom: 0;
+    font-size: 20px;
+    line-height: 20px;
+  }
 }
 
 .ant-table-pagination.ant-pagination {
