@@ -10,7 +10,7 @@ const AppRouter = () => {
       {privateRoutes.map((route) => (
         <Route path={route.path} exact={route.exact} component={route.component} key={route.path} />
       ))}
-      <Redirect to={routePaths.tablePage} />
+      <Redirect to={routePaths.mainPage} />
     </Switch>
   ) : (
     <Switch>

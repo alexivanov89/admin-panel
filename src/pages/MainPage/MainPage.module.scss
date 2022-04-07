@@ -1,0 +1,155 @@
+.root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 67.5px;
+  padding: 23px 23px 23px 49px;
+}
+
+.logoImg {
+  width: 21.5px;
+  height: 21.5px;
+}
+
+.logoText {
+  display: flex;
+  padding-left: 11.5px;
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  color: #3d5170;
+}
+
+.menuItem {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: -0.234375px;
+  color: #3d5170;
+  transition: all 0.3s;
+
+  & svg {
+    fill: #cacedb;
+  }
+}
+
+.copyright {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 16px;
+  color: #818ea3;
+
+  @media screen and (max-width: 479px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
+}
+
+.link {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px;
+
+  @media screen and (max-width: 479px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
+}
+
+.verticalDivider {
+  height: 67.5px;
+  margin: 0;
+}
+
+.badge {
+  sup {
+    min-width: unset;
+    width: 14px;
+    height: 14px;
+    border-radius: 14px;
+    font-size: 9px;
+    line-height: 13px;
+    background: #c4183c;
+    padding: 0 4px;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 105px;
+  padding: 0;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: -0.471429px;
+  color: #5a6169;
+
+  @media screen and (max-width: 479px) {
+    width: 100%;
+  }
+
+  & svg {
+    fill: #abb6bf;
+  }
+}
+
+.footer {
+  @media screen and (max-width: 479px) {
+    padding: 0px 8px;
+  }
+}
+
+.search {
+  input {
+    height: 16px;
+    padding: 0px 9px;
+
+    &::-webkit-input-placeholder {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
+
+    &::-moz-placeholder {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
+
+    &:-ms-input-placeholder {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
+
+    &::-ms-input-placeholder {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
+
+    &::placeholder {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: -0.0928572px;
+      color: #767f9d;
+    }
+  }
+}

@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const TablePage = lazy(() => import('../pages/TablePage/TablePage'));
+const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
 
 export const routePaths = {
   loginPage: '/',
-  tablePage: '/admin',
+  mainPage: '/admin',
 };
 
 export const publicRoutes = [
@@ -18,5 +18,5 @@ export const publicRoutes = [
 ];
 
 export const privateRoutes = [
-  { path: routePaths.tablePage, exact: true, component: TablePage, label: 'Главная' },
+  { path: routePaths.mainPage, exact: false, component: MainPage, label: 'Главная' },
 ];

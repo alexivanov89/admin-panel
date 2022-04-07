@@ -1,0 +1,195 @@
+.title {
+  @media screen and (max-width: 479px) {
+    margin-bottom: 8px !important;
+  }
+}
+.card {
+  background: #ffffff;
+  box-shadow: 0px 2px 0px rgba(90, 97, 105, 0.11), 0px 4px 8px rgba(90, 97, 105, 0.12),
+    0px 10px 10px rgba(90, 97, 105, 0.06), 0px 7px 70px rgba(90, 97, 105, 0.1);
+  border-radius: 9px;
+  width: 100%;
+  min-height: 386px;
+
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    min-height: unset;
+  }
+
+  & [class$="ant-card-head"] {
+    @media screen and (max-width: 479px) {
+      padding: 0px 8px;
+    }
+  }
+}
+
+.table {
+  tr {
+    height: 267px;
+    vertical-align: top;
+
+    @media screen and (orientation: landscape) and (max-height: 600px) {
+      height: unset;
+    }
+
+    td {
+      padding: 16px 8px;
+    }
+
+    & td:first-child {
+      padding-left: 24px;
+
+      @media screen and (max-width: 479px) {
+        padding-left: 8px;
+      }
+    }
+
+    & td:last-child {
+      padding-right: 24px;
+
+      @media screen and (max-width: 479px) {
+        padding-right: 8px;
+      }
+    }
+
+    &:hover {
+      td {
+        background: #ffffff !important;
+      }
+    }
+  }
+}
+
+.carImage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  & img {
+    width: 138px;
+    height: 63px;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+}
+
+.pointName,
+.city,
+.color {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.408571px;
+  color: #121212;
+}
+
+.pointAddress,
+.info,
+.dates {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.408571px;
+  color: #868e96;
+  white-space: nowrap;
+}
+
+.price {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  white-space: nowrap;
+  padding-top: 12px;
+  color: #121212;
+}
+
+.orderActions {
+  padding-top: 15px;
+}
+
+.apply,
+.delete,
+.change {
+  border: 0.5px solid #becad6;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 11px;
+  text-align: center;
+  padding: 6px 8px;
+  color: #5a6169;
+  display: flex;
+  align-items: center;
+  height: unset;
+
+  span {
+    padding-left: 4px;
+  }
+}
+
+.apply {
+  border-radius: 4px 0px 0px 4px !important;
+}
+
+.change {
+  border-radius: 0px 4px 4px 0px !important;
+}
+
+.orderOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: -0.175439px;
+  margin-left: 8.5px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.active {
+  color: #121212;
+}
+
+.select {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.345714px;
+  color: #868e96;
+  width: 110px;
+
+  @media screen and (max-width: 479px) {
+    width: 90px;
+  }
+
+  & [class$="ant-select-selector"] {
+    border: 0.5px solid #becad6 !important;
+    border-radius: 4px !important;
+  }
+
+  & [class$="ant-select-selection-placeholder"] {
+    padding-right: 8px !important;
+  }
+}
+
+.filterBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 95px;
+  color: #ffffff;
+  background: #007bff;
+  border: 0.5px solid #007bff;
+  border-radius: 4px;
+}

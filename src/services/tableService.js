@@ -10,5 +10,6 @@ export const tableService = {
   getCategory: () => apiClient().get('/db/category'),
   getRate: () => apiClient().get('/db/rate'),
   postOrder: (body) => apiClient().post('/db/order/', body),
+  getOrder: (options = '', param = {}) => apiClient().get(`/db/order${options}`, param),
   getOrderById: (orderId) => apiClient().get(`/db/order/${orderId}`),
 };
