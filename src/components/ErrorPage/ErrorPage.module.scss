@@ -1,0 +1,63 @@
+.result {
+  padding: 0;
+  margin-top: -2rem;
+
+  & [class$="ant-result-icon"] {
+    margin-bottom: 13px;
+  }
+
+  & [class$="ant-result-title"] {
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 57px;
+    text-align: center;
+    letter-spacing: -2.5px;
+    color: #3d5170;
+    margin-bottom: 15px;
+  }
+
+  & [class$="ant-result-subtitle"] {
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: #818ea3;
+  }
+
+  & [class$="ant-result-extra"] {
+    margin: 34px 0 0 0;
+  }
+}
+
+.statusCode {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 75px;
+  line-height: 88px;
+  letter-spacing: -5.76923px;
+  color: #cacedb;
+}
+
+.backBtn {
+  width: 95px;
+  height: 29px;
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  letter-spacing: -0.345714px;
+  color: #ffffff;
+  background: #007bff;
+  border: 0.5px solid #007bff;
+  border-radius: 4px;
+
+  &:hover {
+    color: #fff;
+    border-color: #40a9ff;
+    background: #40a9ff;
+  }
+}
