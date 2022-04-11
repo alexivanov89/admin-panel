@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { tableService } from '../../services/tableService';
+import { setIsError, setStatusCode } from './errorSlice';
 
 const initialState = {
   city: {
@@ -64,11 +65,16 @@ export const fetchOrdersAsync = createAsyncThunk('table/fetchOrders', async (opt
   const { auth } = thunkAPI.getState();
   const { accessToken } = auth;
 
-  const response = await tableService.getOrder(options, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  });
+  try {
+    const response = await tableService.getOrder(options, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
 
-  return response.data.data;
+    return response.data.data;
+  } catch (error) {
+    thunkAPI.dispatch(setIsError(true));
+    thunkAPI.dispatch(setStatusCode(error.response.status));
+  }
 });
 
 const tableSlice = createSlice({

@@ -23,6 +23,7 @@ import {
   useRouteMatch,
   useLocation,
 } from 'react-router-dom';
+import { ErrorPage } from '../../components/ErrorPage';
 import {
   AvatarIcon,
   CardCar,
@@ -162,21 +163,21 @@ const MainPage = () => {
           </Row>
         </Header>
         <Content>
-          <ErrorBoundary fallback={<div>Что-то пошло не так...</div>}>
-            <Switch>
-              <Route path={`${path}/cardCar`}>Карточка авто</Route>
-              <Route path={`${path}/listCars`}>Список авто</Route>
-              <Route path={`${path}/orders`}>
+          <Switch>
+            <Route path={`${path}/cardCar`}>Карточка авто</Route>
+            <Route path={`${path}/listCars`}>Список авто</Route>
+            <Route path={`${path}/orders`}>
+              <ErrorBoundary FallbackComponent={ErrorPage}>
                 <Orders />
-              </Route>
-              <Route path={`${path}/menu4`}>Menu 4</Route>
-              <Route path={`${path}/menu5`}>Menu 5</Route>
-              <Route path={`${path}/menu6`}>Menu 6</Route>
-              <Route path={`${path}/menu7`}>Menu 7</Route>
+              </ErrorBoundary>
+            </Route>
+            <Route path={`${path}/menu4`}>Menu 4</Route>
+            <Route path={`${path}/menu5`}>Menu 5</Route>
+            <Route path={`${path}/menu6`}>Menu 6</Route>
+            <Route path={`${path}/menu7`}>Menu 7</Route>
 
-              <Redirect to={`${path}/cardCar`} />
-            </Switch>
-          </ErrorBoundary>
+            <Redirect to={`${path}/cardCar`} />
+          </Switch>
         </Content>
         <Footer className={styles.footer}>
           <Row align="middle" style={{ height: '100%' }}>
