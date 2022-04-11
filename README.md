@@ -1,7 +1,9 @@
 # Admin panel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Стек: React,  redux-toolkit, react-router (v5), antD, axios.
 
-## Available Scripts
+### Demo: [demo](https://alexivanov89.github.io/admin-panel/).
 
-In the project directory, you can run:
+Учетная запись: { username: 'intern', password: 'intern-S!' }
+
+### Админ-часть проекта [Need for Drive](https://alexivanov89.github.io/carsharing-app/).

@@ -1,0 +1,327 @@
+.cardInfoResult {
+  overflow: auto;
+  padding: 0;
+
+  & [class$="ant-result-icon"] {
+    margin-bottom: 10px;
+    .carImage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+        width: 243.5px;
+        height: 110px;
+        -o-object-fit: cover;
+        object-fit: cover;
+      }
+    }
+  }
+
+  & [class$="ant-result-title"] {
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 24.5px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: -0.6125px;
+    color: #3d5170;
+    margin-bottom: 4.5px;
+  }
+
+  & [class$="ant-result-subtitle"] {
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 12.5px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.3125px;
+    color: #818ea3;
+  }
+
+  & [class$="ant-result-extra"] {
+    margin: 11px 0px 0px 0px;
+  }
+}
+
+.wrapperUpload {
+  position: relative;
+  height: 29px;
+  background: #ffffff;
+  border: 0.5px solid #becad6;
+  border-radius: 4px;
+}
+
+.uploadBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65.5px;
+  height: 27px;
+  border: none;
+  background: #e9ecef;
+  border-left: 0.5px solid #becad6;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  letter-spacing: -0.175439px;
+  color: #495057;
+
+  &:hover,
+  &:focus {
+    border-color: #becad6;
+    color: #495057;
+    background: #f2f4f7;
+  }
+}
+
+.placeholder {
+  position: absolute;
+  top: 8px;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: -0.175439px;
+  color: #495057;
+  padding-left: 13px;
+}
+
+.upload {
+  & [class~="ant-upload-select"] {
+    float: right;
+  }
+
+  & [class~="ant-upload-list"] {
+    float: left;
+    height: 29px;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: -0.175439px;
+    color: #495057;
+    padding-left: 13px;
+
+    & [class~="ant-upload-list-item"] {
+      height: 27px;
+      margin: 0;
+    }
+
+    & [class~="ant-upload-text-icon"] {
+      display: none;
+    }
+
+    & [class~="ant-upload-list-item-name"] {
+      font-family: "Roboto";
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      letter-spacing: -0.175439px;
+      color: #495057;
+      padding: 0;
+    }
+  }
+}
+
+.cardInfoTitle {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.408571px;
+  color: #868e96;
+}
+
+.cardInfoProgress {
+  display: flex;
+  flex-direction: column;
+
+  & [class$="ant-progress-text"] {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  & [class$="ant-progress-outer"] {
+    order: 2;
+    margin: 0;
+    padding: 0;
+    height: 15px;
+  }
+
+  & [class$="ant-progress-inner"] {
+    background: #ffffff;
+    box-shadow: inset 0px 0.5px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+  }
+
+  & [class$="ant-progress-bg"] {
+    height: 5px !important;
+  }
+
+  .progressTitle {
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.408571px;
+    color: #868e96;
+  }
+
+  .progressValue {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    letter-spacing: -0.345714px;
+    color: #5a6169;
+  }
+}
+
+.cardInfoSpace {
+  overflow: auto;
+  width: 100%;
+}
+
+.cardInfoDescription {
+  padding: 0;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 13.5px;
+  letter-spacing: -0.408571px;
+  color: #5a6169;
+  min-height: 108px !important;
+  resize: none;
+}
+
+.cardSettingsHeader {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 17.5px;
+  line-height: 21px;
+  letter-spacing: -0.4375px;
+  color: #3d5170;
+}
+
+.groupBtnRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saveBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 110px;
+  height: 29px;
+  color: #ffffff;
+  background: #007bff;
+  border: 0.5px solid #007bff;
+  border-radius: 4px;
+}
+
+.cancelBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 110px;
+  height: 29px;
+  color: #3d5170;
+  background: #e9ecef;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}
+
+.deleteBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 110px;
+  height: 29px;
+  color: #ffffff;
+  background: #cb3656;
+  border-radius: 4px;
+
+  &:hover,
+  &:focus {
+    color: #ffffff;
+    border-color: transparent;
+    background: #e24d6e;
+  }
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    &:last-child {
+      font-family: "Roboto";
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 13px;
+      display: flex;
+      align-items: center;
+      letter-spacing: -0.175439px;
+      color: #495057;
+    }
+  }
+
+  & [class~="ant-checkbox-checked"] {
+    background: #007bff;
+    border-radius: 2px;
+  }
+
+  & [class~="ant-checkbox-inner"] {
+    width: 13px;
+    height: 13px;
+
+    &::after {
+      border: 1px solid #fff;
+      border-top: 0;
+      border-left: 0;
+      width: 3px;
+      height: 6.5px;
+      top: 4px;
+      left: 3px;
+      transform: rotate(50deg) scale(1) translate(-50%, -50%);
+    }
+  }
+}
+
+.input {
+  height: 30px;
+  background: #ffffff;
+  border: 1px solid #becad6;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.175439px;
+  color: #121212;
+}
+
+.plusBtn {
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  border: 1px solid #becad6;
+  border-radius: 4px;
+
+  & svg {
+    fill: #becad6;
+  }
+}
