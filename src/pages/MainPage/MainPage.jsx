@@ -37,6 +37,7 @@ import {
 } from '../../assets/icon';
 import { BellFilled, SearchOutlined, CaretDownOutlined } from '@ant-design/icons';
 import styles from './MainPage.module.scss';
+import { CarEditPage } from '../../components/CarEditPage';
 
 const Orders = lazy(() => import('../../components/Orders/Orders'));
 const { useBreakpoint } = Grid;
@@ -164,7 +165,9 @@ const MainPage = () => {
         </Header>
         <Content>
           <Switch>
-            <Route path={`${path}/cardCar`}>Карточка авто</Route>
+            <Route path={`${path}/cardCar`}>
+              <CarEditPage />
+            </Route>
             <Route path={`${path}/listCars`}>Список авто</Route>
             <Route path={`${path}/orders`}>
               <ErrorBoundary FallbackComponent={ErrorPage}>

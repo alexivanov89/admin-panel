@@ -1,0 +1,103 @@
+.container {
+  display: grid;
+  grid-template-columns: 31% 67%;
+  grid-template-rows: 1fr;
+  gap: 0px 28px;
+  grid-template-areas: "cardInfo cardSettings";
+  padding-bottom: 16px;
+
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 1fr;
+    gap: 28px 0px;
+    grid-template-areas:
+      "cardInfo"
+      "cardSettings";
+  }
+}
+
+.cardInfo {
+  grid-area: cardInfo;
+  height: 506px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+  border-radius: 9px;
+}
+
+.cardSettings {
+  grid-area: cardSettings;
+  height: 890px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
+  border-radius: 9px;
+}
+
+.cardInfoHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 263px;
+  padding: 22px;
+}
+
+.cardInfoBody {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  padding: 0px 22px;
+  box-shadow: none;
+}
+
+.cardInfoFooter {
+  width: 100%;
+  height: 182px;
+  padding: 22px;
+  box-shadow: none;
+}
+
+.cardSettingsHeader {
+  width: 100%;
+  text-align: start;
+  height: 58px;
+  padding: 18px;
+  box-shadow: none;
+}
+
+.cardSettingsBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1 1 auto;
+  padding: 24px 18px;
+  box-shadow: none;
+
+  & [class~="ant-form-item"] {
+    margin: 0;
+  }
+}
+
+.divider {
+  margin: 0;
+  border-top: 1px solid #e5e5e5 !important;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & [class~="ant-form-item-control-input"] {
+    min-height: 29px;
+  }
+
+  label {
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 10.5px;
+    line-height: 12px;
+    letter-spacing: -0.18421px;
+    color: #121212;
+  }
+}
