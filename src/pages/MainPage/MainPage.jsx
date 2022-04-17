@@ -23,11 +23,12 @@ import {
   useRouteMatch,
   useLocation,
 } from 'react-router-dom';
+import { CarEditPage } from '../../components/CarEditPage';
 import { ErrorPage } from '../../components/ErrorPage';
 import {
   AvatarIcon,
   CardCar,
-  ListCars,
+  ListCarsIcon,
   Logo,
   Menu4,
   Menu5,
@@ -37,9 +38,11 @@ import {
 } from '../../assets/icon';
 import { BellFilled, SearchOutlined, CaretDownOutlined } from '@ant-design/icons';
 import styles from './MainPage.module.scss';
-import { CarEditPage } from '../../components/CarEditPage';
 
 const Orders = lazy(() => import('../../components/Orders/Orders'));
+const ListCars = lazy(() => import('../../components/ListCars/ListCars'));
+const ListPoints = lazy(() => import('../../components/ListPoints/ListPoints'));
+
 const { useBreakpoint } = Grid;
 const { Header, Footer, Sider, Content } = Layout;
 const { Text, Link } = Typography;
@@ -79,7 +82,7 @@ const MainPage = () => {
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
 
-          <Menu.Item key={`${url}/listCars`} icon={<ListCars />} className={styles.menuItem}>
+          <Menu.Item key={`${url}/listCars`} icon={<ListCarsIcon />} className={styles.menuItem}>
             <LinkRouter to={`${url}/listCars`}>Список авто</LinkRouter>
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
@@ -89,8 +92,8 @@ const MainPage = () => {
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
 
-          <Menu.Item key={`${url}/menu4`} icon={<Menu4 />} className={styles.menuItem}>
-            <LinkRouter to={`${url}/menu4`}>Menu 4</LinkRouter>
+          <Menu.Item key={`${url}/listPoints`} icon={<Menu4 />} className={styles.menuItem}>
+            <LinkRouter to={`${url}/listPoints`}>Список пунктов</LinkRouter>
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
 
@@ -168,13 +171,17 @@ const MainPage = () => {
             <Route path={`${path}/cardCar`}>
               <CarEditPage />
             </Route>
-            <Route path={`${path}/listCars`}>Список авто</Route>
+            <Route path={`${path}/listCars`}>
+              <ListCars />
+            </Route>
             <Route path={`${path}/orders`}>
               <ErrorBoundary FallbackComponent={ErrorPage}>
                 <Orders />
               </ErrorBoundary>
             </Route>
-            <Route path={`${path}/menu4`}>Menu 4</Route>
+            <Route path={`${path}/listPoints`}>
+              <ListPoints />
+            </Route>
             <Route path={`${path}/menu5`}>Menu 5</Route>
             <Route path={`${path}/menu6`}>Menu 6</Route>
             <Route path={`${path}/menu7`}>Menu 7</Route>
