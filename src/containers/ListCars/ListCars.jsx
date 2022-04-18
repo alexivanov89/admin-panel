@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Button, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { ListEntities } from '../ListEntities';
-import { Image } from '../UI/Image';
+import { ListEntities } from '../../components/ListEntities';
+import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
 import { DropdownIcon, NextIcon, PrevIcon } from '../../assets/icon';
 import { fetchCarAsync } from '../../store/slices/tableSlice';
 import styles from './ListCars.module.scss';
+import { numberWithSpaces } from '../../utils/numberWithSpaces';
 
 const ListCars = () => {
   const { Option } = Select;
@@ -24,48 +25,32 @@ const ListCars = () => {
 
   const columns = fields.map((field) => {
     switch (field) {
-      case 'cityId':
+      case 'priceMin':
         return {
-          title: field,
+          title: 'Цена минимальная',
           dataIndex: field,
-          key: field?.name,
-          render: (field) => <>{field?.name}</>,
+          key: field,
+          render: (price) => <>{`${numberWithSpaces(price)} ₽`}</>,
         };
 
-      case 'rateTypeId':
+      case 'priceMax':
         return {
-          title: field,
+          title: 'Цена максимальная',
           dataIndex: field,
-          key: field?.name,
-          render: (field) => <>{field?.name}</>,
+          key: field,
+          render: (price) => <>{`${numberWithSpaces(price)} ₽`}</>,
         };
 
-      case 'categoryId':
+      case 'name':
         return {
-          title: field,
+          title: 'Марка',
           dataIndex: field,
-          key: field?.name,
-          render: (field) => (
-            <>
-              <p>{field?.name}</p>
-              <p>{field?.description}</p>
-            </>
-          ),
-        };
-
-      case 'colors':
-        return {
-          title: field,
-          dataIndex: field,
-          key: field?.name,
-          render: (colors) => {
-            return colors?.map((color) => <p key={color}>{color}</p>);
-          },
+          key: field,
         };
 
       case 'thumbnail':
         return {
-          title: field,
+          title: 'Изображение',
           dataIndex: field,
           key: field?.name,
           render: (thumbnail) => {
@@ -80,6 +65,51 @@ const ListCars = () => {
               </div>
             );
           },
+        };
+
+      case 'description':
+        return {
+          title: 'Описание',
+          dataIndex: field,
+          key: field,
+        };
+
+      case 'categoryId':
+        return {
+          title: 'Категория',
+          dataIndex: field,
+          key: field?.name,
+          render: (field) => (
+            <>
+              <p>{field?.name}</p>
+              <p>{field?.description}</p>
+            </>
+          ),
+        };
+
+      case 'colors':
+        return {
+          title: 'Цвета авто',
+          dataIndex: field,
+          key: field?.name,
+          render: (colors) => {
+            return colors?.map((color) => <p key={color}>{color}</p>);
+          },
+        };
+
+      case 'tank':
+        return {
+          title: 'Топливо',
+          dataIndex: field,
+          key: field,
+          render: (tank) => <>{`${tank}%`}</>,
+        };
+
+      case 'number':
+        return {
+          title: 'Номер машины',
+          dataIndex: field,
+          key: field,
         };
 
       default:
@@ -127,7 +157,7 @@ const ListCars = () => {
     <>
       <Select
         showSearch
-        placeholder="Field"
+        placeholder="Марка"
         optionFilterProp="children"
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -143,7 +173,7 @@ const ListCars = () => {
       </Select>
       <Select
         showSearch
-        placeholder="Field"
+        placeholder="Категория"
         optionFilterProp="children"
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -159,7 +189,7 @@ const ListCars = () => {
       </Select>
       <Select
         showSearch
-        placeholder="Field"
+        placeholder="Топливо"
         optionFilterProp="children"
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -175,7 +205,7 @@ const ListCars = () => {
       </Select>
       <Select
         showSearch
-        placeholder="Field"
+        placeholder="Цена"
         optionFilterProp="children"
         filterOption={(input, option) =>
           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0

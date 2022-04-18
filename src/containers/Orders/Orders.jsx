@@ -14,7 +14,7 @@ import {
 import { fetchOrdersAsync } from '../../store/slices/tableSlice';
 import format from 'date-fns/format';
 import cn from 'classnames';
-import { Image } from '../UI/Image';
+import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
 import { numberWithSpaces } from '../../utils/numberWithSpaces';
 import styles from './Orders.module.scss';

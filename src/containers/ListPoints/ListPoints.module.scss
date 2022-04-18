@@ -36,7 +36,8 @@
     line-height: 29px !important;
   }
 
-  & [class$="ant-select-selection-item"] {
+  & [class$="ant-select-selection-item"],
+  & [class$="ant-select-selection-placeholder"] {
     line-height: 29px !important;
   }
 

@@ -12,8 +12,8 @@
       font-size: 12px;
       line-height: 14px;
       letter-spacing: -0.377143px;
-      color: #3d5170;
-      background: #ffffff;
+      color: var(--main-blue-light);
+      background: var(--main-white);
       border: none;
 
       &::before {
@@ -57,12 +57,12 @@
       font-size: 12px;
       line-height: 14px;
       letter-spacing: -0.377143px;
-      color: #3d5170;
+      color: var(--main-blue-light);
     }
 
     &:hover {
       td {
-        background: #ffffff !important;
+        background: var(--main-white) !important;
       }
     }
   }

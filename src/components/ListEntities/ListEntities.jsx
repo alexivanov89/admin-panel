@@ -20,10 +20,10 @@ const ListCars = (props) => {
             <Col xs={8} sm={7} style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Space size={[15, 15]} wrap>
                 <Button className={styles.resetBtn} onClick={onReset}>
-                  Reset
+                  Сбросить
                 </Button>
                 <Button type="primary" className={styles.filterBtn} onClick={onApply}>
-                  Apply
+                  Применить
                 </Button>
               </Space>
             </Col>

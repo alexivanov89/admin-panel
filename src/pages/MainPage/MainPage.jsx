@@ -23,7 +23,6 @@ import {
   useRouteMatch,
   useLocation,
 } from 'react-router-dom';
-import { CarEditPage } from '../../components/CarEditPage';
 import { ErrorPage } from '../../components/ErrorPage';
 import {
   AvatarIcon,
@@ -39,9 +38,10 @@ import {
 import { BellFilled, SearchOutlined, CaretDownOutlined } from '@ant-design/icons';
 import styles from './MainPage.module.scss';
 
-const Orders = lazy(() => import('../../components/Orders/Orders'));
-const ListCars = lazy(() => import('../../components/ListCars/ListCars'));
-const ListPoints = lazy(() => import('../../components/ListPoints/ListPoints'));
+const CarEditPage = lazy(() => import('../../containers/CarEditPage/CarEditPage'));
+const Orders = lazy(() => import('../../containers/Orders/Orders'));
+const ListCars = lazy(() => import('../../containers/ListCars/ListCars'));
+const ListPoints = lazy(() => import('../../containers/ListPoints/ListPoints'));
 
 const { useBreakpoint } = Grid;
 const { Header, Footer, Sider, Content } = Layout;

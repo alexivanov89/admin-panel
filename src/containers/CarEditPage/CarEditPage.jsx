@@ -14,8 +14,8 @@ import {
   Checkbox,
 } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { EditPage } from '../EditPage';
-import { Image } from '../UI/Image';
+import { EditPage } from '../../components/EditPage';
+import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
 import styles from './CarEditPage.module.scss';
 
