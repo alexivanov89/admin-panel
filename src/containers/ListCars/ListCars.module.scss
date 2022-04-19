@@ -1,0 +1,47 @@
+.carImage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  & img {
+    width: 80px;
+    height: 40px;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+}
+
+.select {
+  font-family: "Helvetica";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  letter-spacing: -0.345714px;
+  color: #868e96;
+  width: 110px;
+
+  @media screen and (max-width: 479px) {
+    width: 90px;
+  }
+
+  & [class$="ant-select-selector"] {
+    border: 0.5px solid #becad6 !important;
+    border-radius: 4px !important;
+  }
+
+  & [class$="ant-select-selector"],
+  & [class$="ant-select-selection-search-input"] {
+    height: 29px !important;
+    line-height: 29px !important;
+  }
+
+  & [class$="ant-select-selection-item"],
+  & [class$="ant-select-selection-placeholder"] {
+    line-height: 29px !important;
+  }
+
+  & [class$="ant-select-selection-placeholder"] {
+    padding-right: 8px !important;
+  }
+}

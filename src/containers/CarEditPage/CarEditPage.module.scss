@@ -25,7 +25,7 @@
     line-height: 28px;
     text-align: center;
     letter-spacing: -0.6125px;
-    color: #3d5170;
+    color: var(--main-blue-light);
     margin-bottom: 4.5px;
   }
 
@@ -47,7 +47,7 @@
 .wrapperUpload {
   position: relative;
   height: 29px;
-  background: #ffffff;
+  background: var(--main-white);
   border: 0.5px solid #becad6;
   border-radius: 4px;
 }
@@ -155,7 +155,7 @@
   }
 
   & [class$="ant-progress-inner"] {
-    background: #ffffff;
+    background: var(--main-white);
     box-shadow: inset 0px 0.5px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
   }
@@ -206,7 +206,7 @@
   font-size: 17.5px;
   line-height: 21px;
   letter-spacing: -0.4375px;
-  color: #3d5170;
+  color: var(--main-blue-light);
 }
 
 .groupBtnRight {
@@ -222,9 +222,9 @@
   text-align: center;
   width: 110px;
   height: 29px;
-  color: #ffffff;
-  background: #007bff;
-  border: 0.5px solid #007bff;
+  color: var(--main-white);
+  background: var(--main-blue);
+  border: 0.5px solid var(--main-blue);
   border-radius: 4px;
 }
 
@@ -236,7 +236,7 @@
   text-align: center;
   width: 110px;
   height: 29px;
-  color: #3d5170;
+  color: var(--main-blue-light);
   background: #e9ecef;
   border: 1px solid #e9ecef;
   border-radius: 4px;
@@ -250,13 +250,13 @@
   text-align: center;
   width: 110px;
   height: 29px;
-  color: #ffffff;
+  color: var(--main-white);
   background: #cb3656;
   border-radius: 4px;
 
   &:hover,
   &:focus {
-    color: #ffffff;
+    color: var(--main-white);
     border-color: transparent;
     background: #e24d6e;
   }
@@ -280,7 +280,7 @@
   }
 
   & [class~="ant-checkbox-checked"] {
-    background: #007bff;
+    background: var(--main-blue);
     border-radius: 2px;
   }
 
@@ -289,7 +289,7 @@
     height: 13px;
 
     &::after {
-      border: 1px solid #fff;
+      border: 1px solid var(--main-white);
       border-top: 0;
       border-left: 0;
       width: 3px;
@@ -303,7 +303,7 @@
 
 .input {
   height: 30px;
-  background: #ffffff;
+  background: var(--main-white);
   border: 1px solid #becad6;
   border-radius: 4px;
   font-family: "Roboto";
@@ -311,13 +311,13 @@
   font-size: 11px;
   line-height: 13px;
   letter-spacing: -0.175439px;
-  color: #121212;
+  color: var(--main-black);
 }
 
 .plusBtn {
   width: 30px;
   height: 30px;
-  background: #ffffff;
+  background: var(--main-white);
   border: 1px solid #becad6;
   border-radius: 4px;
 

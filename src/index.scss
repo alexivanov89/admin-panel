@@ -2,6 +2,18 @@
 @import "~antd/dist/antd.css";
 @import "./styles/fonts";
 
+:root {
+  --main-color: #0ec261;
+  --main-black: #121212;
+  --main-white: #ffffff;
+  --main-blue: #007bff;
+  --main-blue-light: #3d5170;
+  --main-red: #c4183c;
+  --main-grey: #999999;
+  --main-grey-light: #eeeeee;
+  --main-background: #f5f6f8;
+}
+
 *,
 ::before,
 ::after {
@@ -15,7 +27,7 @@ html {
 
 body {
   margin: 0;
-  background: #f5f6f8;
+  background: var(--main-background);
 }
 
 h1,
@@ -44,11 +56,11 @@ img {
 .ant-layout-sider,
 .ant-layout-header,
 .ant-layout-footer {
-  background: #ffffff;
+  background: var(--main-white);
 }
 
 .ant-layout-content {
-  background: #f5f6f8;
+  background: var(--main-background);
   padding: 28px 25px 28px 32px;
   overflow: auto;
 
@@ -99,7 +111,7 @@ img {
   height: 57px !important;
 
   &:hover svg {
-    fill: #007bff !important;
+    fill: var(--main-blue) !important;
   }
 
   @media screen and (orientation: landscape) and (max-height: 600px) {
@@ -113,10 +125,10 @@ img {
 
 .ant-menu-item-selected {
   background-color: #fbfbfb !important;
-  color: #007bff !important;
+  color: var(--main-blue) !important;
 
   & svg {
-    fill: #007bff !important;
+    fill: var(--main-blue) !important;
   }
 }
 
@@ -127,11 +139,11 @@ img {
 .ant-menu-item::after {
   right: unset !important;
   left: 0;
-  border-right: 4px solid #007bff !important;
+  border-right: 4px solid var(--main-blue) !important;
 }
 
 a.ant-typography {
-  color: #007bff !important;
+  color: var(--main-blue) !important;
 }
 
 .ant-input-group-addon {
@@ -147,7 +159,7 @@ h1.ant-typography {
   line-height: 33px;
   letter-spacing: -0.725px;
   margin-bottom: 28px;
-  color: #3d5170;
+  color: var(--main-blue-light);
 
   @media screen and (orientation: landscape) and (max-height: 600px) {
     margin-bottom: 0;
@@ -161,10 +173,10 @@ h1.ant-typography {
 
   button {
     border: none;
-    background: #ffffff;
+    background: var(--main-white);
 
     &:hover {
-      background: #ffffff;
+      background: var(--main-white);
     }
   }
 
@@ -186,8 +198,8 @@ h1.ant-typography {
   border-radius: 50%;
 
   a {
-    color: #007bff;
-    padding: 0 4px;
+    color: var(--main-blue);
+    padding: 0;
   }
 }
 
@@ -197,7 +209,7 @@ h1.ant-typography {
 
 .ant-pagination-jump-next .ant-pagination-item-ellipsis,
 .ant-pagination-jump-prev .ant-pagination-item-ellipsis {
-  color: #007bff !important;
+  color: var(--main-blue) !important;
   height: 5px;
   top: -8px !important;
 }
@@ -218,18 +230,18 @@ h1.ant-typography {
 }
 
 .ant-pagination-item-active {
-  background: #007bff;
+  background: var(--main-blue);
 
   &:hover a,
   a {
-    color: #ffffff;
+    color: var(--main-white);
   }
 }
 
 .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input,
 .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover {
-  background: #ffffff;
-  border: 0.5px solid #c4183c;
+  background: var(--main-white);
+  border: 0.5px solid var(--main-red);
   box-sizing: border-box;
   box-shadow: 0px 2.5px 5.5px rgba(196, 24, 60, 0.1);
   border-radius: 4px;
@@ -245,5 +257,5 @@ h1.ant-typography {
   font-size: 10px;
   line-height: 11px;
   letter-spacing: -0.175439px;
-  color: #c4183c;
+  color: var(--main-red);
 }

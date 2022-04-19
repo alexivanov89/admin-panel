@@ -4,7 +4,7 @@
   }
 }
 .card {
-  background: #ffffff;
+  background: var(--main-white);
   box-shadow: 0px 2px 0px rgba(90, 97, 105, 0.11), 0px 4px 8px rgba(90, 97, 105, 0.12),
     0px 10px 10px rgba(90, 97, 105, 0.06), 0px 7px 70px rgba(90, 97, 105, 0.1);
   border-radius: 9px;
@@ -53,7 +53,7 @@
 
     &:hover {
       td {
-        background: #ffffff !important;
+        background: var(--main-white) !important;
       }
     }
   }
@@ -80,7 +80,7 @@
   font-size: 13px;
   line-height: 15px;
   letter-spacing: -0.408571px;
-  color: #121212;
+  color: var(--main-black);
 }
 
 .pointAddress,
@@ -102,7 +102,7 @@
   line-height: 28px;
   white-space: nowrap;
   padding-top: 12px;
-  color: #121212;
+  color: var(--main-black);
 }
 
 .orderActions {
@@ -149,12 +149,12 @@
   line-height: 13px;
   letter-spacing: -0.175439px;
   margin-left: 8.5px;
-  color: #999999;
+  color: var(--main-grey);
   white-space: nowrap;
 }
 
 .active {
-  color: #121212;
+  color: var(--main-black);
 }
 
 .select {
@@ -188,8 +188,8 @@
   line-height: 13px;
   text-align: center;
   width: 95px;
-  color: #ffffff;
-  background: #007bff;
-  border: 0.5px solid #007bff;
+  color: var(--main-white);
+  background: var(--main-blue);
+  border: 0.5px solid var(--main-blue);
   border-radius: 4px;
 }

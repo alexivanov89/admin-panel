@@ -1,5 +1,5 @@
 export { ReactComponent as Logo } from './logo.svg';
-export { ReactComponent as ListCars } from './ListCars.svg';
+export { ReactComponent as ListCarsIcon } from './ListCars.svg';
 export { ReactComponent as CardCar } from './CardCar.svg';
 export { ReactComponent as OrdersIcon } from './Orders.svg';
 export { ReactComponent as Menu4 } from './Menu4.svg';

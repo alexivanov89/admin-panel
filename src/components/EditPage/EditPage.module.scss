@@ -18,7 +18,7 @@
 .cardInfo {
   grid-area: cardInfo;
   height: 506px;
-  background: #ffffff;
+  background: var(--main-white);
   box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
   border-radius: 9px;
 }
@@ -26,7 +26,7 @@
 .cardSettings {
   grid-area: cardSettings;
   height: 890px;
-  background: #ffffff;
+  background: var(--main-white);
   box-shadow: 0px 2px 4px rgba(90, 97, 105, 0.12);
   border-radius: 9px;
 }
@@ -98,6 +98,6 @@
     font-size: 10.5px;
     line-height: 12px;
     letter-spacing: -0.18421px;
-    color: #121212;
+    color: var(--main-black);
   }
 }
