@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Select, Space, Table, Typography } from 'antd';
+import { Button, Card, Col, Form, Row, Select, Space, Table, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,12 +11,18 @@ import {
   NextIcon,
   PrevIcon,
 } from '../../assets/icon';
-import { fetchOrdersAsync } from '../../store/slices/tableSlice';
+import {
+  fetchCarAsync,
+  fetchCityAsync,
+  fetchOrdersAsync,
+  fetchOrderStatusAsync,
+} from '../../store/slices/tableSlice';
 import format from 'date-fns/format';
 import cn from 'classnames';
 import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
 import { numberWithSpaces } from '../../utils/numberWithSpaces';
+import { getRequestParams } from '../../utils/getRequestParams';
 import styles from './Orders.module.scss';
 
 const Orders = () => {
@@ -24,9 +30,52 @@ const Orders = () => {
   const ButtonGroup = Button.Group;
   const { Option } = Select;
   const dispatch = useDispatch();
-  const { order } = useSelector(({ table }) => table);
+  const {
+    order,
+    city: { cities },
+    car: { cars },
+    orderStatus: { values },
+  } = useSelector(({ table }) => table);
   const { orders, loading, error } = order;
   const [page, setPage] = useState(1);
+
+  const dateDayAgo = new Date().getTime() - 1000 * 60 * 60 * 24;
+  const dateWeekAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
+  const dateMonthAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 30;
+  const dateYearAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 365;
+  const optionsCities = cities;
+  const optionsCars = Array.from(
+    new Set(
+      cars
+        .filter(({ name, id, ...rest }) => Boolean(name))
+        .map(({ name, id, ...rest }) => ({ name, id })),
+    ),
+  );
+  const optionsOrderStatus = values;
+
+  const initialState = [
+    {
+      name: ['period'],
+      value: {
+        label: 'За день',
+        value: dateDayAgo,
+      },
+    },
+    {
+      name: ['car'],
+      value: null,
+    },
+    {
+      name: ['city'],
+      value: null,
+    },
+    {
+      name: ['orderStatus'],
+      value: null,
+    },
+  ];
+
+  const [fieldsForm, setFields] = useState(initialState);
 
   const data = orders.map((order) => {
     const {
@@ -51,7 +100,7 @@ const Orders = () => {
         name: carId ? carId?.name : null,
       },
       orderInfo: {
-        pointId,
+        carId,
         cityId,
         dateFrom: dateFrom ? format(new Date(dateFrom), 'dd.MM.yyyy k:mm') : null,
         dateTo: dateTo ? format(new Date(dateTo), 'dd.MM.yyyy k:mm') : null,
@@ -90,17 +139,25 @@ const Orders = () => {
       render: (orderInfo) => (
         <div className={styles.orderInfo}>
           <div>
-            <Text className={styles.pointName}>{`${orderInfo?.pointId?.name}`}</Text>
+            <Text className={styles.carName}>
+              {orderInfo?.carId ? `${orderInfo?.carId?.name}` : null}
+            </Text>
             <Text className={styles.info}>{` в `}</Text>
-            <Text className={styles.city}>{`${orderInfo?.cityId?.name}, `}</Text>
-            <Text className={styles.pointAddress}>{`${orderInfo?.pointId?.address}`}</Text>
+            <Text className={styles.city}>
+              {orderInfo?.cityId ? `${orderInfo?.cityId?.name}, ` : null}
+            </Text>
+            <Text className={styles.pointAddress}>
+              {orderInfo?.pointId ? `${orderInfo?.pointId?.address}` : null}
+            </Text>
           </div>
-          <Text className={styles.dates}>{`${orderInfo?.dateFrom} `}</Text>
+          <Text className={styles.dates}>
+            {orderInfo?.dateFrom ? `${orderInfo?.dateFrom} ` : null}
+          </Text>
           <Text className={styles.info}>&mdash;</Text>
-          <Text className={styles.dates}>{` ${orderInfo?.dateTo}`}</Text>
+          <Text className={styles.dates}>{orderInfo?.dateTo ? ` ${orderInfo?.dateTo}` : null}</Text>
           <div>
             <Text className={styles.info}>{`Цвет: `}</Text>
-            <Text className={styles.color}>{`${orderInfo?.color}`}</Text>
+            <Text className={styles.color}>{orderInfo?.color ? `${orderInfo?.color}` : null}</Text>
           </div>
         </div>
       ),
@@ -183,11 +240,21 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchOrdersAsync(`?offset=5000&page=${page}&limit=10`));
+    dispatch(fetchOrdersAsync(`?createdAt[$gt]=${dateDayAgo}`));
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchCityAsync());
+    dispatch(fetchOrderStatusAsync());
+    dispatch(fetchCarAsync());
   }, []);
 
   const onChange = (page) => {
     setPage(page);
+  };
+
+  const onChangeField = (newFields) => {
+    setFields(newFields);
   };
 
   return (
@@ -195,84 +262,133 @@ const Orders = () => {
       <Title className={styles.title}>Заказы</Title>
       <Card
         title={
-          <div>
-            <Row>
+          <Row>
+            <Form
+              name="filters"
+              layout="inline"
+              style={{ width: '100%' }}
+              fields={fieldsForm}
+              onFieldsChange={(_, allFields) => {
+                onChangeField(allFields);
+              }}
+              requiredMark="optional"
+              onFinish={(values) => {
+                dispatch(fetchOrdersAsync(getRequestParams(fieldsForm)));
+              }}
+            >
               <Col xs={18} sm={20}>
-                <Space size={[15, 15]} wrap>
-                  <Select
-                    showSearch
-                    placeholder="Период"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    filterSort={(optionA, optionB) =>
-                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                    }
-                    suffixIcon={<DropdownIcon />}
-                    className={styles.select}
-                  >
-                    <Option value="1">За неделю</Option>
-                    <Option value="2">За месяц</Option>
-                  </Select>
-                  <Select
-                    showSearch
-                    placeholder="Пункт выдачи"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    filterSort={(optionA, optionB) =>
-                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                    }
-                    suffixIcon={<DropdownIcon />}
-                    className={styles.select}
-                  >
-                    <Option value="1">Elantra</Option>
-                    <Option value="2">Магнит</Option>
-                  </Select>
-                  <Select
-                    showSearch
-                    placeholder="Город"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    filterSort={(optionA, optionB) =>
-                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                    }
-                    suffixIcon={<DropdownIcon />}
-                    className={styles.select}
-                  >
-                    <Option value="1">Ульяновск</Option>
-                    <Option value="2">Екатеринбург</Option>
-                  </Select>
-                  <Select
-                    showSearch
-                    placeholder="Статус"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    filterSort={(optionA, optionB) =>
-                      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-                    }
-                    suffixIcon={<DropdownIcon />}
-                    className={styles.select}
-                  >
-                    <Option value="1">В процессе</Option>
-                    <Option value="2">Завершенные</Option>
-                    <Option value="3">Отмененные</Option>
-                  </Select>
+                <Space size={[15, 15]} wrap style={{ width: '100%' }}>
+                  <Form.Item name="period" style={{ margin: 0 }}>
+                    <Select
+                      showSearch
+                      placeholder="Период"
+                      optionFilterProp="children"
+                      filterSort={(optionA, optionB) =>
+                        optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                      }
+                      suffixIcon={<DropdownIcon />}
+                      className={styles.select}
+                      optionLabelProp="label"
+                      labelInValue={true}
+                      allowClear
+                    >
+                      <Option value={dateDayAgo} label="За день">
+                        За день
+                      </Option>
+                      <Option value={dateWeekAgo} label="За неделю">
+                        За неделю
+                      </Option>
+                      <Option value={dateMonthAgo} label="За месяц">
+                        За месяц
+                      </Option>
+                      <Option value={dateYearAgo} label="За год">
+                        За год
+                      </Option>
+                      <Option value={null} label="За всё время">
+                        За всё время
+                      </Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item name="car" style={{ margin: 0 }}>
+                    <Select
+                      showSearch
+                      placeholder="Авто"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      filterSort={(optionA, optionB) =>
+                        optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                      }
+                      suffixIcon={<DropdownIcon />}
+                      className={styles.select}
+                      allowClear
+                    >
+                      {optionsCars?.length > 0 &&
+                        optionsCars.map((option) => (
+                          <Option value={option?.id} key={option?.id}>
+                            {option?.name}
+                          </Option>
+                        ))}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item name="city" style={{ margin: 0 }}>
+                    <Select
+                      showSearch
+                      placeholder="Город"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      filterSort={(optionA, optionB) =>
+                        optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                      }
+                      suffixIcon={<DropdownIcon />}
+                      className={styles.select}
+                      allowClear
+                    >
+                      {optionsCities?.length > 0 &&
+                        optionsCities.map((option) => (
+                          <Option value={option?.id} key={option?.id}>
+                            {option?.name}
+                          </Option>
+                        ))}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item name="orderStatus" style={{ margin: 0 }}>
+                    <Select
+                      showSearch
+                      placeholder="Статус"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      filterSort={(optionA, optionB) =>
+                        optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                      }
+                      suffixIcon={<DropdownIcon />}
+                      className={styles.select}
+                      allowClear
+                    >
+                      {optionsOrderStatus?.length > 0 &&
+                        optionsOrderStatus.map((option) => (
+                          <Option value={option?.id} key={option?.id}>
+                            {option?.name}
+                          </Option>
+                        ))}
+                    </Select>
+                  </Form.Item>
                 </Space>
               </Col>
               <Col xs={6} sm={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button type="primary" className={styles.filterBtn}>
-                  Применить
-                </Button>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" className={styles.filterBtn}>
+                    Применить
+                  </Button>
+                </Form.Item>
               </Col>
-            </Row>
-          </div>
+            </Form>
+          </Row>
         }
         bordered={false}
         className={styles.card}
@@ -286,6 +402,8 @@ const Orders = () => {
             position: ['bottomCenter'],
             current: page,
             pageSize: 1,
+            // total: 6000,
+            showSizeChanger: false,
             onChange: onChange,
             itemRender: itemRender,
           }}

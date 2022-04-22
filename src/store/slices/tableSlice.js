@@ -65,12 +65,12 @@ export const fetchCityAsync = createAsyncThunk('table/fetchCity', async () => {
   return response.data;
 });
 
-export const fetchPointAsync = createAsyncThunk('table/fetchPoint', async () => {
-  const response = await tableService.getPoint();
+export const fetchPointAsync = createAsyncThunk('table/fetchPoint', async (options) => {
+  const response = await tableService.getPoint(options);
   return response.data;
 });
 
-export const fetchCarAsync = createAsyncThunk('table/fetchCar', async (options, thunkAPI) => {
+export const fetchCarAsync = createAsyncThunk('table/fetchCar', async (options) => {
   const response = await tableService.getCar(options);
   return response.data;
 });
@@ -80,8 +80,8 @@ export const fetchCategoryAsync = createAsyncThunk('table/fetchCategory', async 
   return response.data;
 });
 
-export const fetchRateAsync = createAsyncThunk('table/fetchRate', async () => {
-  const response = await tableService.getRate();
+export const fetchRateAsync = createAsyncThunk('table/fetchRate', async (options) => {
+  const response = await tableService.getRate(options);
   return response.data;
 });
 
@@ -91,14 +91,8 @@ export const fetchRateTypeAsync = createAsyncThunk('table/fetchRateType', async 
 });
 
 export const fetchOrdersAsync = createAsyncThunk('table/fetchOrders', async (options, thunkAPI) => {
-  const { auth } = thunkAPI.getState();
-  const { accessToken } = auth;
-
   try {
-    const response = await tableService.getOrder(options, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-
+    const response = await tableService.getOrder(options);
     return response.data.data;
   } catch (error) {
     thunkAPI.dispatch(setIsError(true));

@@ -1,10 +1,11 @@
-import { Button, Card, Col, Row, Space, Typography } from 'antd';
+import { Button, Card, Col, Form, Row, Space, Typography } from 'antd';
 import { Table } from '../UI/Table';
 import styles from './ListEntities.module.scss';
 
 const ListCars = (props) => {
   const { Title } = Typography;
-  const { title, filters, tableProps, onReset, onApply } = props;
+  const { title, form, tableProps } = props;
+  const { onChange, fields, filters, onReset, onApply } = form;
 
   return (
     <>
@@ -12,21 +13,37 @@ const ListCars = (props) => {
       <Card
         title={
           <Row>
-            <Col xs={16} sm={17}>
-              <Space size={[15, 15]} wrap>
-                {filters}
-              </Space>
-            </Col>
-            <Col xs={8} sm={7} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Space size={[15, 15]} wrap>
-                <Button className={styles.resetBtn} onClick={onReset}>
-                  Сбросить
-                </Button>
-                <Button type="primary" className={styles.filterBtn} onClick={onApply}>
-                  Применить
-                </Button>
-              </Space>
-            </Col>
+            <Form
+              name="filters"
+              layout="inline"
+              style={{ width: '100%' }}
+              fields={fields}
+              onFieldsChange={(_, allFields) => {
+                onChange(allFields);
+              }}
+              requiredMark="optional"
+              onFinish={onApply}
+            >
+              <Col xs={16} sm={17}>
+                <Space size={[15, 15]} wrap style={{ width: '100%' }}>
+                  {filters}
+                </Space>
+              </Col>
+              <Col xs={8} sm={7} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Space size={[15, 15]} wrap>
+                  <Form.Item style={{ margin: 0 }}>
+                    <Button className={styles.resetBtn} onClick={onReset}>
+                      Сбросить
+                    </Button>
+                  </Form.Item>
+                  <Form.Item style={{ margin: 0 }}>
+                    <Button type="primary" htmlType="submit" className={styles.filterBtn}>
+                      Применить
+                    </Button>
+                  </Form.Item>
+                </Space>
+              </Col>
+            </Form>
           </Row>
         }
         bordered={false}

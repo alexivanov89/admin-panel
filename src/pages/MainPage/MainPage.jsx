@@ -1,4 +1,4 @@
-import { lazy, useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import {
   Avatar,
@@ -42,6 +42,11 @@ const CarEditPage = lazy(() => import('../../containers/CarEditPage/CarEditPage'
 const Orders = lazy(() => import('../../containers/Orders/Orders'));
 const ListCars = lazy(() => import('../../containers/ListCars/ListCars'));
 const ListPoints = lazy(() => import('../../containers/ListPoints/ListPoints'));
+const ListCategories = lazy(() => import('../../containers/ListCategories/ListCategories'));
+const ListCities = lazy(() => import('../../containers/ListCities/ListCities'));
+const ListRates = lazy(() => import('../../containers/ListRates/ListRates'));
+const ListRateTypes = lazy(() => import('../../containers/ListRateTypes/ListRateTypes'));
+const ListOrderStatus = lazy(() => import('../../containers/ListOrderStatus/ListOrderStatus'));
 
 const { useBreakpoint } = Grid;
 const { Header, Footer, Sider, Content } = Layout;
@@ -97,18 +102,28 @@ const MainPage = () => {
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
 
-          <Menu.Item key={`${url}/menu5`} icon={<Menu5 />} className={styles.menuItem}>
-            <LinkRouter to={`${url}/menu5`}>Menu 5</LinkRouter>
+          <Menu.Item key={`${url}/listCategories`} icon={<Menu5 />} className={styles.menuItem}>
+            <LinkRouter to={`${url}/listCategories`}>Список категорий</LinkRouter>
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
 
-          <Menu.Item key={`${url}/menu6`} icon={<Menu6 />} className={styles.menuItem}>
-            <LinkRouter to={`${url}/menu6`}>Menu 6</LinkRouter>
+          <Menu.Item key={`${url}/listCities`} icon={<Menu6 />} className={styles.menuItem}>
+            <LinkRouter to={`${url}/listCities`}>Список городов</LinkRouter>
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
 
-          <Menu.Item key={`${url}/menu7`} icon={<Menu7 />} className={styles.menuItem}>
-            <LinkRouter to={`${url}/menu7`}>Menu 7</LinkRouter>
+          <Menu.Item key={`${url}/listRates`} icon={<Menu7 />} className={styles.menuItem}>
+            <LinkRouter to={`${url}/listRates`}>Список тарифов</LinkRouter>
+          </Menu.Item>
+          <Menu.Divider style={{ margin: 0 }} />
+
+          <Menu.Item key={`${url}/listRateTypes`} icon={<Menu7 />} className={styles.menuItem}>
+            <LinkRouter to={`${url}/listRateTypes`}>Список типов тарифа</LinkRouter>
+          </Menu.Item>
+          <Menu.Divider style={{ margin: 0 }} />
+
+          <Menu.Item key={`${url}/listOrderStatus`} icon={<Menu7 />} className={styles.menuItem}>
+            <LinkRouter to={`${url}/listOrderStatus`}>Список статусов заказа</LinkRouter>
           </Menu.Item>
           <Menu.Divider style={{ margin: 0 }} />
         </Menu>
@@ -167,27 +182,43 @@ const MainPage = () => {
           </Row>
         </Header>
         <Content>
-          <Switch>
-            <Route path={`${path}/cardCar`}>
-              <CarEditPage />
-            </Route>
-            <Route path={`${path}/listCars`}>
-              <ListCars />
-            </Route>
-            <Route path={`${path}/orders`}>
-              <ErrorBoundary FallbackComponent={ErrorPage}>
-                <Orders />
-              </ErrorBoundary>
-            </Route>
-            <Route path={`${path}/listPoints`}>
-              <ListPoints />
-            </Route>
-            <Route path={`${path}/menu5`}>Menu 5</Route>
-            <Route path={`${path}/menu6`}>Menu 6</Route>
-            <Route path={`${path}/menu7`}>Menu 7</Route>
+          <Suspense fallback={<div>Загрузка...</div>}>
+            <Switch>
+              <Route path={`${path}/cardCar`}>
+                <CarEditPage />
+              </Route>
+              <Route path={`${path}/listCars`}>
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListCars />
+                </ErrorBoundary>
+              </Route>
+              <Route path={`${path}/orders`}>
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <Orders />
+                </ErrorBoundary>
+              </Route>
+              <Route path={`${path}/listPoints`}>
+                <ListPoints />
+              </Route>
+              <Route path={`${path}/listCategories`}>
+                <ListCategories />
+              </Route>
+              <Route path={`${path}/listCities`}>
+                <ListCities />
+              </Route>
+              <Route path={`${path}/listRates`}>
+                <ListRates />
+              </Route>
+              <Route path={`${path}/listRateTypes`}>
+                <ListRateTypes />
+              </Route>
+              <Route path={`${path}/listOrderStatus`}>
+                <ListOrderStatus />
+              </Route>
 
-            <Redirect to={`${path}/cardCar`} />
-          </Switch>
+              <Redirect to={`${path}/cardCar`} />
+            </Switch>
+          </Suspense>
         </Content>
         <Footer className={styles.footer}>
           <Row align="middle" style={{ height: '100%' }}>
