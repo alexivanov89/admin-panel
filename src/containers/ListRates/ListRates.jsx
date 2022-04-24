@@ -3,60 +3,55 @@ import { Button, Form, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { ListEntities } from '../../components/ListEntities';
 import { DropdownIcon, NextIcon, PrevIcon } from '../../assets/icon';
-import { fetchCityAsync, fetchPointAsync } from '../../store/slices/tableSlice';
+import { fetchRateAsync, fetchRateTypeAsync } from '../../store/slices/tableSlice';
 import { getRequestParams } from '../../utils/getRequestParams';
-import styles from './ListPoints.module.scss';
+import styles from './ListRates.module.scss';
 
-const ListPoints = () => {
+const ListRates = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const {
-    point,
-    city: { cities },
+    rate,
+    rateType: { rateTypes },
   } = useSelector(({ table }) => table);
-  const { points, loading, count, fields } = point;
+  const { rates, loading, count, fields } = rate;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
 
   const initialState = [
     {
-      name: ['city'],
+      name: ['rateType'],
       value: null,
     },
   ];
 
   const [fieldsForm, setFields] = useState(initialState);
 
-  const options = cities;
+  const options = rateTypes;
 
   useEffect(() => {
-    dispatch(fetchPointAsync());
-    dispatch(fetchCityAsync());
+    dispatch(fetchRateAsync());
+    dispatch(fetchRateTypeAsync());
   }, []);
 
-  const dataSource = points.map((item) => ({ ...item, key: item.id }));
+  const dataSource = rates.map((item) => ({ ...item, key: item.id }));
 
   const columns = fields.map((field) => {
     switch (field) {
-      case 'cityId':
+      case 'price':
         return {
-          title: 'Город',
-          dataIndex: field,
-          key: field?.name,
-          render: (field) => <>{field?.name}</>,
-        };
-      case 'address':
-        return {
-          title: 'Адрес',
+          title: 'Цена',
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{field}</> : null),
         };
 
-      case 'name':
+      case 'rateTypeId':
         return {
-          title: 'Название пункта',
+          title: 'Тип тарифа',
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{`${field?.name} (${field?.unit})`}</> : null),
         };
 
       default:
@@ -64,6 +59,7 @@ const ListPoints = () => {
           title: field,
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{field}</> : null),
         };
     }
   });
@@ -83,10 +79,10 @@ const ListPoints = () => {
   };
 
   const filters = (
-    <Form.Item name="city" style={{ margin: 0 }}>
+    <Form.Item name="rateType" style={{ margin: 0 }}>
       <Select
         showSearch
-        placeholder="Город"
+        placeholder="Тип тарифа"
         optionFilterProp="children"
         filterSort={(optionA, optionB) =>
           optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
@@ -106,15 +102,15 @@ const ListPoints = () => {
 
   const onReset = () => {
     setFields(initialState);
-    dispatch(fetchPointAsync());
+    dispatch(fetchRateAsync());
   };
   const onApply = () => {
-    dispatch(fetchPointAsync(getRequestParams(fieldsForm)));
+    dispatch(fetchRateAsync(getRequestParams(fieldsForm)));
   };
 
   return (
     <ListEntities
-      title="Список пунктов"
+      title="Список тарифов"
       form={{
         fields: fieldsForm,
         onChange: (newFields) => {
@@ -143,4 +139,4 @@ const ListPoints = () => {
   );
 };
 
-export default ListPoints;
+export default ListRates;

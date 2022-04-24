@@ -1,24 +1,55 @@
 import { useEffect, useState } from 'react';
-import { Button, Select } from 'antd';
+import { Button, Form, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { ListEntities } from '../../components/ListEntities';
 import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
 import { DropdownIcon, NextIcon, PrevIcon } from '../../assets/icon';
-import { fetchCarAsync } from '../../store/slices/tableSlice';
-import styles from './ListCars.module.scss';
+import { fetchCarAsync, fetchCategoryAsync } from '../../store/slices/tableSlice';
+import { nanoid } from '@reduxjs/toolkit';
 import { numberWithSpaces } from '../../utils/numberWithSpaces';
+import { getRequestParams } from '../../utils/getRequestParams';
+import styles from './ListCars.module.scss';
 
 const ListCars = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
-  const { car } = useSelector(({ table }) => table);
+  const {
+    car,
+    category: { categories },
+  } = useSelector(({ table }) => table);
   const { cars, loading, count, fields } = car;
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
 
+  const initialState = [
+    {
+      name: ['nameCar'],
+      value: null,
+    },
+    {
+      name: ['category'],
+      value: null,
+    },
+    {
+      name: ['tank'],
+      value: null,
+    },
+    {
+      name: ['priceMin'],
+      value: null,
+    },
+  ];
+
+  const [fieldsForm, setFields] = useState(initialState);
+
+  const optionsCategory = categories;
+
+  const optionsName = Array.from(new Set(cars.map(({ name, ...rest }) => name).filter(Boolean)));
+
   useEffect(() => {
     dispatch(fetchCarAsync());
+    dispatch(fetchCategoryAsync());
   }, []);
 
   const dataSource = cars.map((item) => ({ ...item, key: item.id }));
@@ -30,7 +61,7 @@ const ListCars = () => {
           title: 'Цена минимальная',
           dataIndex: field,
           key: field,
-          render: (price) => <>{`${numberWithSpaces(price)} ₽`}</>,
+          render: (price) => (price ? <>{`${numberWithSpaces(price)} ₽`}</> : null),
         };
 
       case 'priceMax':
@@ -38,7 +69,7 @@ const ListCars = () => {
           title: 'Цена максимальная',
           dataIndex: field,
           key: field,
-          render: (price) => <>{`${numberWithSpaces(price)} ₽`}</>,
+          render: (price) => (price ? <>{`${numberWithSpaces(price)} ₽`}</> : null),
         };
 
       case 'name':
@@ -46,6 +77,7 @@ const ListCars = () => {
           title: 'Марка',
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{field}</> : null),
         };
 
       case 'thumbnail':
@@ -72,6 +104,7 @@ const ListCars = () => {
           title: 'Описание',
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{field}</> : null),
         };
 
       case 'categoryId':
@@ -93,7 +126,7 @@ const ListCars = () => {
           dataIndex: field,
           key: field?.name,
           render: (colors) => {
-            return colors?.map((color) => <p key={color}>{color}</p>);
+            return colors?.map((color) => <p key={nanoid()}>{color}</p>);
           },
         };
 
@@ -102,7 +135,7 @@ const ListCars = () => {
           title: 'Топливо',
           dataIndex: field,
           key: field,
-          render: (tank) => <>{`${tank}%`}</>,
+          render: (tank) => (tank ? <>{`${tank}%`}</> : null),
         };
 
       case 'number':
@@ -110,6 +143,7 @@ const ListCars = () => {
           title: 'Номер машины',
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{field}</> : null),
         };
 
       default:
@@ -117,6 +151,7 @@ const ListCars = () => {
           title: field,
           dataIndex: field,
           key: field,
+          render: (field) => (field ? <>{field}</> : null),
         };
     }
   });
@@ -135,103 +170,124 @@ const ListCars = () => {
     return originalElement;
   };
 
-  const tableProps = {
-    pagination: {
-      position: ['bottomCenter'],
-      current: page,
-      pageSize: limit,
-      onChange: onChange,
-      itemRender: itemRender,
-      showSizeChanger: false,
-    },
-    showHeader: true,
-    columns: columns,
-    dataSource: dataSource,
-    loading: loading,
-    scroll: { x: 980 },
-  };
-
-  const title = 'Список авто';
-
   const filters = (
     <>
-      <Select
-        showSearch
-        placeholder="Марка"
-        optionFilterProp="children"
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA, optionB) =>
-          optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-        }
-        suffixIcon={<DropdownIcon />}
-        className={styles.select}
-      >
-        <Option value="1">value1</Option>
-        <Option value="2">value2</Option>
-      </Select>
-      <Select
-        showSearch
-        placeholder="Категория"
-        optionFilterProp="children"
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA, optionB) =>
-          optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-        }
-        suffixIcon={<DropdownIcon />}
-        className={styles.select}
-      >
-        <Option value="1">value1</Option>
-        <Option value="2">value2</Option>
-      </Select>
-      <Select
-        showSearch
-        placeholder="Топливо"
-        optionFilterProp="children"
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA, optionB) =>
-          optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-        }
-        suffixIcon={<DropdownIcon />}
-        className={styles.select}
-      >
-        <Option value="1">value1</Option>
-        <Option value="2">value2</Option>
-      </Select>
-      <Select
-        showSearch
-        placeholder="Цена"
-        optionFilterProp="children"
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA, optionB) =>
-          optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-        }
-        suffixIcon={<DropdownIcon />}
-        className={styles.select}
-      >
-        <Option value="1">value1</Option>
-        <Option value="2">value2</Option>
-      </Select>
+      <Form.Item name="nameCar" style={{ margin: 0 }}>
+        <Select
+          showSearch
+          placeholder="Марка"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          filterSort={(optionA, optionB) =>
+            optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+          }
+          suffixIcon={<DropdownIcon />}
+          className={styles.select}
+        >
+          {optionsName?.length > 0 &&
+            optionsName.map((option) => (
+              <Option value={option} key={nanoid()}>
+                {option}
+              </Option>
+            ))}
+        </Select>
+      </Form.Item>
+      <Form.Item name="category" style={{ margin: 0 }}>
+        <Select
+          showSearch
+          placeholder="Категория"
+          optionFilterProp="children"
+          filterSort={(optionA, optionB) =>
+            optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+          }
+          suffixIcon={<DropdownIcon />}
+          className={styles.select}
+        >
+          {optionsCategory?.length > 0 &&
+            optionsCategory.map((option) => (
+              <Option value={option?.id} key={option?.id}>
+                {option?.name}
+              </Option>
+            ))}
+        </Select>
+      </Form.Item>
+      <Form.Item name="tank" style={{ margin: 0 }}>
+        <Select
+          showSearch
+          placeholder="Топливо"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          filterSort={(optionA, optionB) =>
+            optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+          }
+          suffixIcon={<DropdownIcon />}
+          className={styles.select}
+        >
+          <Option value="[$gt]=50">больше 50%</Option>
+          <Option value="[$lt]=50">меньше 50%</Option>
+        </Select>
+      </Form.Item>
+      <Form.Item name="priceMin" style={{ margin: 0 }}>
+        <Select
+          showSearch
+          placeholder="Цена мин"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+          filterSort={(optionA, optionB) =>
+            optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+          }
+          suffixIcon={<DropdownIcon />}
+          className={styles.select}
+        >
+          <Option value="[$gt]=10000">больше 10 тыс</Option>
+          <Option value="[$lt]=10000">меньше 10 тыс</Option>
+        </Select>
+      </Form.Item>
     </>
   );
 
-  const onReset = () => {};
-  const onApply = () => {};
+  const onReset = () => {
+    setFields(initialState);
+    dispatch(fetchCarAsync());
+  };
+
+  const onApply = () => {
+    dispatch(fetchCarAsync(getRequestParams(fieldsForm)));
+  };
 
   return (
     <ListEntities
-      title={title}
-      filters={filters}
-      tableProps={tableProps}
-      onReset={onReset}
-      onApply={onApply}
+      title="Список авто"
+      form={{
+        fields: fieldsForm,
+        onChange: (newFields) => {
+          setFields(newFields);
+        },
+        filters: filters,
+        onReset: onReset,
+        onApply: onApply,
+      }}
+      tableProps={{
+        pagination: {
+          position: ['bottomCenter'],
+          current: page,
+          pageSize: limit,
+          onChange: onChange,
+          itemRender: itemRender,
+          showSizeChanger: false,
+        },
+        showHeader: true,
+        columns: columns,
+        dataSource: dataSource,
+        loading: loading,
+        scroll: { x: 980 },
+      }}
     />
   );
 };

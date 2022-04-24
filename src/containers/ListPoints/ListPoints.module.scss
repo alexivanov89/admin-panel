@@ -19,7 +19,7 @@
   line-height: 13px;
   letter-spacing: -0.345714px;
   color: #868e96;
-  width: 110px;
+  width: 110px !important;
 
   @media screen and (max-width: 479px) {
     width: 90px;
@@ -44,4 +44,8 @@
   & [class$="ant-select-selection-placeholder"] {
     padding-right: 8px !important;
   }
+}
+
+[class~="ant-select-item-option"] {
+  font-size: 11px;
 }
