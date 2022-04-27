@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Form, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { ListEntities } from '../../components/ListEntities';
@@ -61,6 +61,7 @@ const ListCars = () => {
           title: 'Цена минимальная',
           dataIndex: field,
           key: field,
+          editable: true,
           render: (price) => (price ? <>{`${numberWithSpaces(price)} ₽`}</> : null),
         };
 
@@ -69,6 +70,7 @@ const ListCars = () => {
           title: 'Цена максимальная',
           dataIndex: field,
           key: field,
+          editable: true,
           render: (price) => (price ? <>{`${numberWithSpaces(price)} ₽`}</> : null),
         };
 
@@ -135,6 +137,7 @@ const ListCars = () => {
           title: 'Топливо',
           dataIndex: field,
           key: field,
+          editable: true,
           render: (tank) => (tank ? <>{`${tank}%`}</> : null),
         };
 
@@ -143,6 +146,7 @@ const ListCars = () => {
           title: 'Номер машины',
           dataIndex: field,
           key: field,
+          editable: true,
           render: (field) => (field ? <>{field}</> : null),
         };
 
@@ -172,7 +176,7 @@ const ListCars = () => {
 
   const filters = (
     <>
-      <Form.Item name="nameCar" style={{ margin: 0 }}>
+      <Form.Item name="nameCar" style={{ margin: '0px 0px 0px 2px' }}>
         <Select
           showSearch
           placeholder="Марка"
@@ -252,14 +256,32 @@ const ListCars = () => {
     </>
   );
 
-  const onReset = () => {
+  const onReset = useCallback(() => {
     setFields(initialState);
     dispatch(fetchCarAsync());
-  };
+  }, []);
 
-  const onApply = () => {
+  const onApply = useCallback(() => {
     dispatch(fetchCarAsync(getRequestParams(fieldsForm)));
-  };
+  }, [fieldsForm]);
+
+  const buttons = (
+    <>
+      <Form.Item style={{ margin: 0 }}>
+        <Button className={styles.addBtn}>Создать</Button>
+      </Form.Item>
+      <Form.Item style={{ margin: 0 }}>
+        <Button className={styles.resetBtn} onClick={onReset}>
+          Сбросить
+        </Button>
+      </Form.Item>
+      <Form.Item style={{ margin: 0 }}>
+        <Button type="primary" htmlType="submit" className={styles.filterBtn} onClick={onApply}>
+          Применить
+        </Button>
+      </Form.Item>
+    </>
+  );
 
   return (
     <ListEntities
@@ -270,8 +292,7 @@ const ListCars = () => {
           setFields(newFields);
         },
         filters: filters,
-        onReset: onReset,
-        onApply: onApply,
+        buttons: buttons,
       }}
       tableProps={{
         pagination: {

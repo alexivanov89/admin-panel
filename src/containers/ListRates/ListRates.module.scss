@@ -11,7 +11,7 @@
   }
 }
 
-.select {
+.selectFilterRate {
   font-family: "Helvetica";
   font-style: normal;
   font-weight: 400;
@@ -48,4 +48,41 @@
 
 [class~="ant-select-item-option"] {
   font-size: 11px;
+}
+
+.addBtn,
+.filterBtn,
+.resetBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 95px;
+  height: 29px;
+  color: var(--main-white);
+  border: 0.5px solid var(--main-blue);
+  border-radius: 4px;
+}
+
+.addBtn,
+.filterBtn {
+  background: var(--main-blue);
+}
+
+.resetBtn {
+  background: var(--main-red);
+
+  &:hover,
+  &:focus {
+    color: var(--main-white);
+    background: #ea476b;
+  }
+}
+
+.inputNumber {
+  width: 100%;
+}
+
+.selectCreateRate {
 }

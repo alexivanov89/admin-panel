@@ -1,0 +1,106 @@
+.table {
+  tr {
+    vertical-align: top;
+
+    @media screen and (orientation: landscape) and (max-height: 600px) {
+      height: unset;
+    }
+
+    th {
+      font-family: "Helvetica";
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: -0.377143px;
+      color: var(--main-blue-light);
+      background: var(--main-white);
+      border: none;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    td:not(:first-of-type),
+    td:not(:first-of-type) > *,
+    td a {
+      font-family: "Roboto" !important;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: left;
+      letter-spacing: -0.377143px;
+      color: #818ea3;
+      border: none;
+    }
+
+    & td:first-child,
+    & th:first-child {
+      padding-left: 20.5px;
+      border: none;
+
+      @media screen and (max-width: 479px) {
+        padding-left: 8px;
+      }
+    }
+
+    & td:last-child,
+    & th:last-child {
+      padding-right: 20.5px;
+
+      @media screen and (max-width: 479px) {
+        padding-right: 8px;
+      }
+    }
+
+    & td:first-child,
+    & td:first-child > * {
+      font-family: "Helvetica";
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 14px;
+      letter-spacing: -0.377143px;
+      color: var(--main-blue-light);
+    }
+  }
+}
+
+.editableRow .ant-form-item-explain {
+  position: absolute;
+  top: 100%;
+  font-size: 12px;
+}
+
+.editableRow {
+  & [class$="ant-form-item-control-input"] {
+    min-height: unset;
+
+    input {
+      font-family: "Helvetica";
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 14px;
+      letter-spacing: -0.377143px;
+      color: var(--main-blue-light);
+      padding: 0;
+    }
+  }
+
+  .select {
+    padding: 0;
+    & [class$="ant-select-selector"],
+    & [class$="ant-select-selection-item"],
+    input {
+      height: 16px !important;
+      line-height: 16px !important;
+      padding: 0 !important;
+    }
+  }
+
+  [class$="ant-input-number-input"],
+  [class$="ant-input-number-input-wrap"] {
+    height: 16px !important;
+    line-height: 16px !important;
+    padding: 0 !important;
+  }
+}

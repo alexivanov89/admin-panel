@@ -240,7 +240,7 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchOrdersAsync(`?createdAt[$gt]=${dateDayAgo}`));
+    dispatch(fetchOrdersAsync(getRequestParams(fieldsForm)));
   }, []);
 
   useEffect(() => {
@@ -278,7 +278,7 @@ const Orders = () => {
             >
               <Col xs={18} sm={20}>
                 <Space size={[15, 15]} wrap style={{ width: '100%' }}>
-                  <Form.Item name="period" style={{ margin: 0 }}>
+                  <Form.Item name="period" style={{ margin: '0px 0px 0px 2px' }}>
                     <Select
                       showSearch
                       placeholder="Период"
@@ -402,7 +402,6 @@ const Orders = () => {
             position: ['bottomCenter'],
             current: page,
             pageSize: 1,
-            // total: 6000,
             showSizeChanger: false,
             onChange: onChange,
             itemRender: itemRender,
