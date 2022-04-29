@@ -101,3 +101,57 @@
     color: var(--main-black);
   }
 }
+
+.saveBtn,
+.createBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 110px;
+  height: 29px;
+  color: var(--main-white);
+  background: var(--main-blue);
+  border: 0.5px solid var(--main-blue);
+  border-radius: 4px;
+}
+
+.cancelBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 110px;
+  height: 29px;
+  color: var(--main-blue-light);
+  background: #e9ecef;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}
+
+.deleteBtn {
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  width: 110px;
+  height: 29px;
+  color: var(--main-white);
+  background: #cb3656;
+  border-radius: 4px;
+
+  &:hover,
+  &:focus {
+    color: var(--main-white);
+    border-color: transparent;
+    background: #e24d6e;
+  }
+}
+
+.groupBtnRight {
+  display: flex;
+  justify-content: flex-end;
+}
