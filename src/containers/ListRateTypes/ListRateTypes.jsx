@@ -11,8 +11,9 @@ import styles from './ListRateTypes.module.scss';
 const ListRateTypes = () => {
   const dispatch = useDispatch();
   const { rateType } = useSelector(({ table }) => table);
-  const { rateTypes, loading, count, fields } = rateType;
+  const { rateTypes, loading, fields } = rateType;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);

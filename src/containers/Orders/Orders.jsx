@@ -1,6 +1,18 @@
-import { Button, Card, Col, Form, Row, Select, Space, Table, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  message,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Typography,
+} from 'antd';
 import {
   ApplyIcon,
   CheckboxOff,
@@ -17,13 +29,15 @@ import {
   fetchOrdersAsync,
   fetchOrderStatusAsync,
 } from '../../store/slices/tableSlice';
-import format from 'date-fns/format';
-import cn from 'classnames';
 import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
+import format from 'date-fns/format';
+import cn from 'classnames';
 import { numberWithSpaces } from '../../utils/numberWithSpaces';
 import { getRequestParams } from '../../utils/getRequestParams';
 import styles from './Orders.module.scss';
+import { tableService } from '../../services/tableService';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 const Orders = () => {
   const { Title, Text } = Typography;
@@ -36,8 +50,19 @@ const Orders = () => {
     car: { cars },
     orderStatus: { values },
   } = useSelector(({ table }) => table);
-  const { orders, loading, error } = order;
+  const { orders, loading } = order;
   const [page, setPage] = useState(1);
+  let { url } = useRouteMatch();
+  const history = useHistory();
+  const ORDER_STATUS_CONFIRMED = {
+    name: 'Подтвержденные',
+    id: '5e26a1f0099b810b946c5d8b',
+  };
+
+  const ORDER_STATUS_CANCELED = {
+    name: 'Отмененые',
+    id: '5e26a1f5099b810b946c5d8c',
+  };
 
   const dateDayAgo = new Date().getTime() - 1000 * 60 * 60 * 24;
   const dateWeekAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
@@ -84,9 +109,7 @@ const Orders = () => {
       color,
       dateFrom,
       dateTo,
-      pointId,
       price,
-      orderStatusId,
       isFullTank,
       isNeedChildChair,
       isRightWheel,
@@ -116,6 +139,7 @@ const Orders = () => {
         apply: 'готово',
         delete: 'отмена',
         change: 'изменить',
+        order: order,
       },
     };
     return item;
@@ -214,15 +238,63 @@ const Orders = () => {
       render: (orderActions) => (
         <div className={styles.orderActions}>
           <ButtonGroup>
-            <Button icon={<ApplyIcon />} className={styles.apply}>
-              {orderActions?.apply}
-            </Button>
-            <Button icon={<CloseIcon />} className={styles.delete}>
-              {orderActions?.delete}
-            </Button>
-            <Button icon={<EditIcon />} className={styles.change}>
-              {orderActions?.change}
-            </Button>
+            <Popconfirm
+              placement="topRight"
+              title="Уверены, что хотите подтвердить заказ?"
+              onConfirm={() => {
+                tableService
+                  .putOrderById(orderActions?.order?.id, {
+                    ...orderActions?.order,
+                    orderStatusId: ORDER_STATUS_CONFIRMED,
+                  })
+                  .then(() => {
+                    message.success(`Заказ успешно подтверждён.`);
+                  })
+                  .catch(() => message.error(`При отправке данных  произошла ошибка.`));
+              }}
+              cancelText="Отмена"
+            >
+              <Button icon={<ApplyIcon />} className={styles.apply}>
+                {orderActions?.apply}
+              </Button>
+            </Popconfirm>
+
+            <Popconfirm
+              placement="topRight"
+              title="Уверены, что хотите отменить заказ?"
+              onConfirm={() => {
+                tableService
+                  .putOrderById(orderActions?.order?.id, {
+                    ...orderActions?.order,
+                    orderStatusId: ORDER_STATUS_CANCELED,
+                  })
+                  .then(() => {
+                    message.success(`Заказ успешно отменён.`);
+                  })
+                  .catch(() => message.error(`При отправке данных  произошла ошибка.`));
+              }}
+              cancelText="Отмена"
+            >
+              <Button icon={<CloseIcon />} className={styles.delete}>
+                {orderActions?.delete}
+              </Button>
+            </Popconfirm>
+
+            <Popconfirm
+              placement="topRight"
+              title="Уверены, что хотите изменить заказ?"
+              onConfirm={() => {
+                history.push({
+                  pathname: `${url}/${orderActions?.order?.id}`,
+                  state: { order: orderActions?.order },
+                });
+              }}
+              cancelText="Отмена"
+            >
+              <Button icon={<EditIcon />} className={styles.change}>
+                {orderActions?.change}
+              </Button>
+            </Popconfirm>
           </ButtonGroup>
         </div>
       ),

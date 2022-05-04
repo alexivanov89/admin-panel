@@ -4,6 +4,4 @@
 
 ### Demo: [demo](https://alexivanov89.github.io/admin-panel/).
 
-Учетная запись: { username: 'intern', password: 'intern-S!' }
-
 ### Админ-часть проекта [Need for Drive](https://alexivanov89.github.io/carsharing-app/).

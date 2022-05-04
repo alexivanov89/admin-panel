@@ -31,6 +31,8 @@ export const tableService = {
   postOrder: (body) => apiClient().post('/db/order/', body),
   getOrder: (options = '', param = {}) => apiClient().get(`/db/order${options}`, param),
   getOrderById: (orderId) => apiClient().get(`/db/order/${orderId}`),
+  putOrderById: (dataId, body) => apiClient().put(`/db/order/${dataId}`, body),
+  deleteOrderById: (dataId) => apiClient().delete(`/db/order/${dataId}`),
   postOrderStatus: (body) => apiClient().post(`/db/orderStatus/`, body),
   getOrderStatus: () => apiClient().get(`/db/orderStatus`),
   putOrderStatusById: (dataId, body) => apiClient().put(`/db/orderStatus/${dataId}`, body),

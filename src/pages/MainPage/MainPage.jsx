@@ -48,6 +48,7 @@ const ListCities = lazy(() => import('../../containers/ListCities/ListCities'));
 const ListRates = lazy(() => import('../../containers/ListRates/ListRates'));
 const ListRateTypes = lazy(() => import('../../containers/ListRateTypes/ListRateTypes'));
 const ListOrderStatus = lazy(() => import('../../containers/ListOrderStatus/ListOrderStatus'));
+const OrderEditPage = lazy(() => import('../../containers/OrderEditPage/OrderEditPage'));
 
 const { useBreakpoint } = Grid;
 const { Header, Footer, Sider, Content } = Layout;
@@ -197,9 +198,15 @@ const MainPage = () => {
                 </ErrorBoundary>
               </Route>
 
-              <Route path={`${path}/orders`}>
+              <Route exact path={`${path}/orders`}>
                 <ErrorBoundary FallbackComponent={ErrorPage}>
                   <Orders />
+                </ErrorBoundary>
+              </Route>
+
+              <Route exact path={`${path}/orders/:id`}>
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <OrderEditPage />
                 </ErrorBoundary>
               </Route>
 

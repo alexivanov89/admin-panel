@@ -11,8 +11,9 @@ import styles from './ListOrderStatus.module.scss';
 const ListOrderStatus = () => {
   const dispatch = useDispatch();
   const { orderStatus } = useSelector(({ table }) => table);
-  const { values, loading, count, fields } = orderStatus;
+  const { values, loading, fields } = orderStatus;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);

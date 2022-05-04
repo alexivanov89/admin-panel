@@ -16,8 +16,9 @@ const ListRates = () => {
     rate,
     rateType: { rateTypes },
   } = useSelector(({ table }) => table);
-  const { rates, loading, count, fields } = rate;
+  const { rates, loading, fields } = rate;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,10 +31,6 @@ const ListRates = () => {
     form
       .validateFields()
       .then((values) => {
-        const prepareValues = {
-          price: values?.price,
-          rateTypeId: rateTypes.find((item) => item.id === values?.rateTypeId),
-        };
         tableService.postRate(values);
         form.resetFields();
       })

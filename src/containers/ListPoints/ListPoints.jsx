@@ -16,8 +16,9 @@ const ListPoints = () => {
     point,
     city: { cities },
   } = useSelector(({ table }) => table);
-  const { points, loading, count, fields } = point;
+  const { points, loading, fields } = point;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,12 +31,6 @@ const ListPoints = () => {
     form
       .validateFields()
       .then((values) => {
-        const prepareValues = {
-          name: values?.name,
-          address: values?.address,
-          cityId: cities.find((item) => item.id === values?.cityId),
-        };
-
         tableService.postPoint(values);
         form.resetFields();
       })

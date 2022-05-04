@@ -18,8 +18,9 @@ const ListCars = () => {
     car,
     category: { categories },
   } = useSelector(({ table }) => table);
-  const { cars, loading, count, fields } = car;
+  const { cars, loading, fields } = car;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
 
   const initialState = [

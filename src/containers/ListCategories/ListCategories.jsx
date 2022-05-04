@@ -11,8 +11,9 @@ import styles from './ListCategories.module.scss';
 const ListCategories = () => {
   const dispatch = useDispatch();
   const { category } = useSelector(({ table }) => table);
-  const { categories, loading, count, fields } = category;
+  const { categories, loading, fields } = category;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);

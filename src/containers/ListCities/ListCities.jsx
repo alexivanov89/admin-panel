@@ -11,8 +11,9 @@ import styles from './ListCities.module.scss';
 const ListCities = () => {
   const dispatch = useDispatch();
   const { city } = useSelector(({ table }) => table);
-  const { cities, loading, count, fields } = city;
+  const { cities, loading, fields } = city;
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
