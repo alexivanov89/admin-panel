@@ -15,15 +15,18 @@ import {
   Checkbox,
   InputNumber,
   Select,
+  Grid,
 } from 'antd';
 import { EditPage } from '../../components/EditPage';
 import { Image } from '../../components/UI/Image';
 import { PlusOutlined } from '@ant-design/icons';
-import { DropdownIcon } from '../../assets/icon';
+import { ApplyIcon, CloseIcon, DropdownIcon } from '../../assets/icon';
 import NoFoto from '../../assets/img/noFoto.jpg';
 import { tableService } from '../../services/tableService';
 import { fetchCarAsync, fetchCategoryAsync } from '../../store/slices/tableSlice';
 import styles from './CarEditPage.module.scss';
+
+const { useBreakpoint } = Grid;
 
 const CarEditPage = () => {
   const { Text } = Typography;
@@ -34,6 +37,8 @@ const CarEditPage = () => {
     category: { categories },
     car: { cars },
   } = useSelector(({ table }) => table);
+  const screens = useBreakpoint();
+  const isSidebarOpen = screens.xl;
 
   const optionsCar = cars;
   const optionsCategory = categories;
@@ -61,6 +66,36 @@ const CarEditPage = () => {
   ];
   const [optionsColors, setOptionsColors] = useState(initialOptionsColors);
   const [categoryCar, setCategoryCar] = useState(null);
+
+  const configMessage = (message) => ({
+    content: (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <span>{message}</span>
+        <CloseIcon
+          className={styles.closeIcon}
+          onClick={() => {
+            message.destroy();
+          }}
+        />
+      </div>
+    ),
+    duration: 3,
+    className: styles.messageSuccess,
+    style: {
+      marginTop: '59.5px',
+      position: 'relative',
+      width: isSidebarOpen ? 'calc(100% - 285px)' : '100%',
+      left: isSidebarOpen ? '285px' : '0',
+    },
+    icon: <ApplyIcon className={styles.messageIcon} />,
+  });
 
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -189,13 +224,13 @@ const CarEditPage = () => {
             form.resetFields();
           })
           .then(() => {
-            message.success(`Машина успешно сохранена.`);
+            message.success(configMessage('Успех! Машина сохранена'));
             dispatch(fetchCarAsync());
           })
-          .catch(() => message.error(`При сохранении машины  произошла ошибка.`));
+          .catch(() => message.error(configMessage(`При сохранении машины  произошла ошибка.`)));
       })
 
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const onCancel = () => {
@@ -213,13 +248,13 @@ const CarEditPage = () => {
             form.resetFields();
           })
           .then(() => {
-            message.success(`Машина успешно удалена.`);
+            message.success(configMessage('Успех! Машина удалена'));
             setId(null);
             dispatch(fetchCarAsync());
           })
-          .catch(() => message.error(`При удалении машины  произошла ошибка.`));
+          .catch(() => message.error(configMessage(`При удалении машины  произошла ошибка.`)));
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const onCreate = () => {
@@ -247,12 +282,12 @@ const CarEditPage = () => {
             form.resetFields();
           })
           .then(() => {
-            message.success(`Машина успешно создана.`);
+            message.success(configMessage('Успех! Машина создана'));
             dispatch(fetchCarAsync());
           })
-          .catch(() => message.error(`При создании машины  произошла ошибка.`));
+          .catch(() => message.error(configMessage(`При создании машины  произошла ошибка.`)));
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const onFieldsChange = (changedFields, allFields) => {

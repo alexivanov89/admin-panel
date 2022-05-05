@@ -20,7 +20,6 @@ const ListCars = () => {
   } = useSelector(({ table }) => table);
   const { cars, loading, fields } = car;
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
 
   const initialState = [

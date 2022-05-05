@@ -13,7 +13,6 @@ const ListRateTypes = () => {
   const { rateType } = useSelector(({ table }) => table);
   const { rateTypes, loading, fields } = rateType;
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +32,7 @@ const ListRateTypes = () => {
         dispatch(fetchRateTypeAsync());
         setIsModalVisible(false);
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const handleCancel = () => {

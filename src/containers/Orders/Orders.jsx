@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import cn from 'classnames';
+import format from 'date-fns/format';
 import {
   Button,
   Card,
@@ -31,13 +34,10 @@ import {
 } from '../../store/slices/tableSlice';
 import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
-import format from 'date-fns/format';
-import cn from 'classnames';
+import { tableService } from '../../services/tableService';
 import { numberWithSpaces } from '../../utils/numberWithSpaces';
 import { getRequestParams } from '../../utils/getRequestParams';
 import styles from './Orders.module.scss';
-import { tableService } from '../../services/tableService';
-import { useHistory, useRouteMatch } from 'react-router-dom';
 
 const Orders = () => {
   const { Title, Text } = Typography;
@@ -54,15 +54,6 @@ const Orders = () => {
   const [page, setPage] = useState(1);
   let { url } = useRouteMatch();
   const history = useHistory();
-  const ORDER_STATUS_CONFIRMED = {
-    name: 'Подтвержденные',
-    id: '5e26a1f0099b810b946c5d8b',
-  };
-
-  const ORDER_STATUS_CANCELED = {
-    name: 'Отмененые',
-    id: '5e26a1f5099b810b946c5d8c',
-  };
 
   const dateDayAgo = new Date().getTime() - 1000 * 60 * 60 * 24;
   const dateWeekAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
@@ -245,7 +236,7 @@ const Orders = () => {
                 tableService
                   .putOrderById(orderActions?.order?.id, {
                     ...orderActions?.order,
-                    orderStatusId: ORDER_STATUS_CONFIRMED,
+                    orderStatusId: values.find(({ name }) => name === 'Подтвержденные'),
                   })
                   .then(() => {
                     message.success(`Заказ успешно подтверждён.`);
@@ -266,7 +257,7 @@ const Orders = () => {
                 tableService
                   .putOrderById(orderActions?.order?.id, {
                     ...orderActions?.order,
-                    orderStatusId: ORDER_STATUS_CANCELED,
+                    orderStatusId: values.find(({ name }) => name === 'Отмененные'),
                   })
                   .then(() => {
                     message.success(`Заказ успешно отменён.`);

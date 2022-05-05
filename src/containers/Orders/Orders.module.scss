@@ -127,9 +127,16 @@
     padding-left: 4px;
   }
 }
-
+.delete {
+  & svg {
+    fill: var(--main-red);
+  }
+}
 .apply {
   border-radius: 4px 0px 0px 4px !important;
+  & svg {
+    fill: var(--main-color);
+  }
 }
 
 .change {

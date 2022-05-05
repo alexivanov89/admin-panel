@@ -13,7 +13,6 @@ const ListOrderStatus = () => {
   const { orderStatus } = useSelector(({ table }) => table);
   const { values, loading, fields } = orderStatus;
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +32,7 @@ const ListOrderStatus = () => {
         dispatch(fetchOrderStatusAsync());
         setIsModalVisible(false);
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const handleCancel = () => {

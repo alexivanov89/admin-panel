@@ -18,7 +18,6 @@ const ListRates = () => {
   } = useSelector(({ table }) => table);
   const { rates, loading, fields } = rate;
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -38,7 +37,7 @@ const ListRates = () => {
         dispatch(fetchRateAsync());
         setIsModalVisible(false);
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const handleCancel = () => {

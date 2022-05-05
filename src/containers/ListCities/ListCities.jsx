@@ -13,7 +13,6 @@ const ListCities = () => {
   const { city } = useSelector(({ table }) => table);
   const { cities, loading, fields } = city;
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +32,7 @@ const ListCities = () => {
         dispatch(fetchCityAsync());
         setIsModalVisible(false);
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const handleCancel = () => {

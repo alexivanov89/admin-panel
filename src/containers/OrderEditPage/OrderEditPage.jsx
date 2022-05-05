@@ -8,6 +8,7 @@ import {
   ConfigProvider,
   DatePicker,
   Form,
+  Grid,
   InputNumber,
   message,
   Progress,
@@ -24,10 +25,12 @@ import locale from 'antd/lib/locale/ru_RU';
 import { EditPage } from '../../components/EditPage';
 import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
-import { DropdownIcon } from '../../assets/icon';
+import { ApplyIcon, CloseIcon, DropdownIcon } from '../../assets/icon';
 import { tableService } from '../../services/tableService';
 import { fetchPointAsync, fetchRateAsync } from '../../store/slices/tableSlice';
 import styles from './OrderEditPage.module.scss';
+
+const { useBreakpoint } = Grid;
 
 const OrderEditPage = () => {
   const { Text } = Typography;
@@ -89,6 +92,39 @@ const OrderEditPage = () => {
   );
   const optionsRates = rates;
 
+  const screens = useBreakpoint();
+  const isSidebarOpen = screens.xl;
+
+  const configMessage = (message) => ({
+    content: (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <span>{message}</span>
+        <CloseIcon
+          className={styles.closeIcon}
+          onClick={() => {
+            message.destroy();
+          }}
+        />
+      </div>
+    ),
+    duration: 3,
+    className: styles.messageSuccess,
+    style: {
+      marginTop: '59.5px',
+      position: 'relative',
+      width: isSidebarOpen ? 'calc(100% - 285px)' : '100%',
+      left: isSidebarOpen ? '285px' : '0',
+    },
+    icon: <ApplyIcon className={styles.messageIcon} />,
+  });
+
   const onFinish = () => {
     form
       .validateFields()
@@ -107,15 +143,15 @@ const OrderEditPage = () => {
         tableService
           .putOrderById(order?.id, prepareFieldsValue)
           .then(() => {
-            message.success(`Заказ успешно изменён.`);
+            message.success(configMessage(`Успех! Заказ изменён`));
           })
           .then(() => {
             history.goBack();
           })
-          .catch(() => message.error(`При изменении Заказа  произошла ошибка.`));
+          .catch(() => message.error(configMessage(`При изменении Заказа  произошла ошибка`)));
       })
 
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const onDelete = () => {
@@ -125,14 +161,14 @@ const OrderEditPage = () => {
         tableService
           .deleteOrderById(order?.id)
           .then(() => {
-            message.success(`Заказ успешно удалён.`);
+            message.success(configMessage(`Успех! Заказ удалён`));
           })
           .then(() => {
             history.goBack();
           })
-          .catch(() => message.error(`При удалении заказа  произошла ошибка.`));
+          .catch(() => message.error(configMessage(`При удалении заказа  произошла ошибка`)));
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const onCreate = () => {
@@ -153,14 +189,14 @@ const OrderEditPage = () => {
         tableService
           .postOrder(prepareFieldsValue)
           .then(() => {
-            message.success(`Заказ успешно создан.`);
+            message.success(configMessage(`Успех! Заказ создан`));
           })
           .then(() => {
             history.goBack();
           })
-          .catch(() => message.error(`При создании Заказа  произошла ошибка.`));
+          .catch(() => message.error(configMessage(`При создании Заказа  произошла ошибка`)));
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const onFieldsChange = (changedFields, allFields) => {

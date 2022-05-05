@@ -13,7 +13,6 @@ const ListCategories = () => {
   const { category } = useSelector(({ table }) => table);
   const { categories, loading, fields } = category;
   const [page, setPage] = useState(1);
-  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(5);
   const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,7 +32,7 @@ const ListCategories = () => {
         dispatch(fetchCategoryAsync());
         setIsModalVisible(false);
       })
-      .catch((info) => {});
+      .catch(() => {});
   };
 
   const handleCancel = () => {

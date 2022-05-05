@@ -314,3 +314,58 @@
     width: 80px;
   }
 }
+
+.messageSuccess {
+  padding: 0 27.5px;
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: space-between;
+  height: 42px;
+
+  & [class~="ant-message-notice-content"] {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--main-color);
+    padding: 0;
+    box-shadow: none;
+  }
+
+  & [class~="ant-message-custom-content"] {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 7px;
+    font-family: "Helvetica";
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.325px;
+    color: var(--main-white);
+
+    & > span {
+      width: 100%;
+    }
+  }
+}
+
+.messageIcon {
+  width: 17px;
+  height: 17px;
+}
+
+.closeIcon {
+  width: 10px;
+  height: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.messageIcon,
+.closeIcon {
+  & svg {
+    fill: var(--main-white);
+  }
+}
