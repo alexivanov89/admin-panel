@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/admin-panel/static/css/main.2cbad74b.css",
-    "main.js": "/admin-panel/static/js/main.e4455504.js",
+    "main.js": "/admin-panel/static/js/main.b52f1326.js",
     "static/css/924.19e248bc.chunk.css": "/admin-panel/static/css/924.19e248bc.chunk.css",
     "static/js/924.87d9f37b.chunk.js": "/admin-panel/static/js/924.87d9f37b.chunk.js",
     "static/css/198.f634755c.chunk.css": "/admin-panel/static/css/198.f634755c.chunk.css",
     "static/js/198.6657ec29.chunk.js": "/admin-panel/static/js/198.6657ec29.chunk.js",
     "static/css/107.88c4afe6.chunk.css": "/admin-panel/static/css/107.88c4afe6.chunk.css",
-    "static/js/107.e0848431.chunk.js": "/admin-panel/static/js/107.e0848431.chunk.js",
+    "static/js/107.8d302a96.chunk.js": "/admin-panel/static/js/107.8d302a96.chunk.js",
     "static/css/139.0f5c45f8.chunk.css": "/admin-panel/static/css/139.0f5c45f8.chunk.css",
     "static/js/139.9ecdcda4.chunk.js": "/admin-panel/static/js/139.9ecdcda4.chunk.js",
     "static/css/780.e8c113e0.chunk.css": "/admin-panel/static/css/780.e8c113e0.chunk.css",
@@ -25,7 +25,7 @@
     "static/css/740.65c06fb8.chunk.css": "/admin-panel/static/css/740.65c06fb8.chunk.css",
     "static/js/740.5f5e2a26.chunk.js": "/admin-panel/static/js/740.5f5e2a26.chunk.js",
     "static/css/59.5bd3774f.chunk.css": "/admin-panel/static/css/59.5bd3774f.chunk.css",
-    "static/js/59.d8b7bd5c.chunk.js": "/admin-panel/static/js/59.d8b7bd5c.chunk.js",
+    "static/js/59.003a15ab.chunk.js": "/admin-panel/static/js/59.003a15ab.chunk.js",
     "static/js/570.fef118e3.chunk.js": "/admin-panel/static/js/570.fef118e3.chunk.js",
     "static/js/466.445e984c.chunk.js": "/admin-panel/static/js/466.445e984c.chunk.js",
     "static/js/463.3a92ca1d.chunk.js": "/admin-panel/static/js/463.3a92ca1d.chunk.js",
@@ -119,13 +119,13 @@
     "static/media/ApplyIcon.svg": "/admin-panel/static/media/ApplyIcon.000fc7609286ea5f5a029ab27de990ec.svg",
     "static/media/CheckboxOff.svg": "/admin-panel/static/media/CheckboxOff.abc0c92fb2170ae7d8fe1ee3287449f2.svg",
     "main.2cbad74b.css.map": "/admin-panel/static/css/main.2cbad74b.css.map",
-    "main.e4455504.js.map": "/admin-panel/static/js/main.e4455504.js.map",
+    "main.b52f1326.js.map": "/admin-panel/static/js/main.b52f1326.js.map",
     "924.19e248bc.chunk.css.map": "/admin-panel/static/css/924.19e248bc.chunk.css.map",
     "924.87d9f37b.chunk.js.map": "/admin-panel/static/js/924.87d9f37b.chunk.js.map",
     "198.f634755c.chunk.css.map": "/admin-panel/static/css/198.f634755c.chunk.css.map",
     "198.6657ec29.chunk.js.map": "/admin-panel/static/js/198.6657ec29.chunk.js.map",
     "107.88c4afe6.chunk.css.map": "/admin-panel/static/css/107.88c4afe6.chunk.css.map",
-    "107.e0848431.chunk.js.map": "/admin-panel/static/js/107.e0848431.chunk.js.map",
+    "107.8d302a96.chunk.js.map": "/admin-panel/static/js/107.8d302a96.chunk.js.map",
     "139.0f5c45f8.chunk.css.map": "/admin-panel/static/css/139.0f5c45f8.chunk.css.map",
     "139.9ecdcda4.chunk.js.map": "/admin-panel/static/js/139.9ecdcda4.chunk.js.map",
     "780.e8c113e0.chunk.css.map": "/admin-panel/static/css/780.e8c113e0.chunk.css.map",
@@ -143,7 +143,7 @@
     "740.65c06fb8.chunk.css.map": "/admin-panel/static/css/740.65c06fb8.chunk.css.map",
     "740.5f5e2a26.chunk.js.map": "/admin-panel/static/js/740.5f5e2a26.chunk.js.map",
     "59.5bd3774f.chunk.css.map": "/admin-panel/static/css/59.5bd3774f.chunk.css.map",
-    "59.d8b7bd5c.chunk.js.map": "/admin-panel/static/js/59.d8b7bd5c.chunk.js.map",
+    "59.003a15ab.chunk.js.map": "/admin-panel/static/js/59.003a15ab.chunk.js.map",
     "570.fef118e3.chunk.js.map": "/admin-panel/static/js/570.fef118e3.chunk.js.map",
     "466.445e984c.chunk.js.map": "/admin-panel/static/js/466.445e984c.chunk.js.map",
     "463.3a92ca1d.chunk.js.map": "/admin-panel/static/js/463.3a92ca1d.chunk.js.map",
@@ -160,6 +160,6 @@
   },
   "entrypoints": [
     "static/css/main.2cbad74b.css",
-    "static/js/main.e4455504.js"
+    "static/js/main.b52f1326.js"
   ]
 }
