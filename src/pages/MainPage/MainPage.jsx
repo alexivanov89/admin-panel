@@ -24,6 +24,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { ErrorPage } from '../../components/ErrorPage';
+import { Spinner } from '../../components/UI/Spinner';
 import {
   AvatarIcon,
   CardCar,
@@ -47,6 +48,7 @@ const ListCities = lazy(() => import('../../containers/ListCities/ListCities'));
 const ListRates = lazy(() => import('../../containers/ListRates/ListRates'));
 const ListRateTypes = lazy(() => import('../../containers/ListRateTypes/ListRateTypes'));
 const ListOrderStatus = lazy(() => import('../../containers/ListOrderStatus/ListOrderStatus'));
+const OrderEditPage = lazy(() => import('../../containers/OrderEditPage/OrderEditPage'));
 
 const { useBreakpoint } = Grid;
 const { Header, Footer, Sider, Content } = Layout;
@@ -182,38 +184,66 @@ const MainPage = () => {
           </Row>
         </Header>
         <Content>
-          <Suspense fallback={<div>Загрузка...</div>}>
+          <Suspense fallback={<Spinner />}>
             <Switch>
               <Route path={`${path}/cardCar`}>
-                <CarEditPage />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <CarEditPage />
+                </ErrorBoundary>
               </Route>
+
               <Route path={`${path}/listCars`}>
                 <ErrorBoundary FallbackComponent={ErrorPage}>
                   <ListCars />
                 </ErrorBoundary>
               </Route>
-              <Route path={`${path}/orders`}>
+
+              <Route exact path={`${path}/orders`}>
                 <ErrorBoundary FallbackComponent={ErrorPage}>
                   <Orders />
                 </ErrorBoundary>
               </Route>
+
+              <Route exact path={`${path}/orders/:id`}>
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <OrderEditPage />
+                </ErrorBoundary>
+              </Route>
+
               <Route path={`${path}/listPoints`}>
-                <ListPoints />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListPoints />
+                </ErrorBoundary>
               </Route>
+
               <Route path={`${path}/listCategories`}>
-                <ListCategories />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListCategories />
+                </ErrorBoundary>
               </Route>
+
               <Route path={`${path}/listCities`}>
-                <ListCities />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListCities />
+                </ErrorBoundary>
               </Route>
+
               <Route path={`${path}/listRates`}>
-                <ListRates />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListRates />
+                </ErrorBoundary>
               </Route>
+
               <Route path={`${path}/listRateTypes`}>
-                <ListRateTypes />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListRateTypes />
+                </ErrorBoundary>
               </Route>
+
               <Route path={`${path}/listOrderStatus`}>
-                <ListOrderStatus />
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                  <ListOrderStatus />
+                </ErrorBoundary>
               </Route>
 
               <Redirect to={`${path}/cardCar`} />

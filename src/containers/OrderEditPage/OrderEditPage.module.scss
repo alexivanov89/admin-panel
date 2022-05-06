@@ -44,88 +44,6 @@
   }
 }
 
-.wrapperUpload {
-  position: relative;
-  height: 29px;
-  background: var(--main-white);
-  border: 0.5px solid #becad6;
-  border-radius: 4px;
-}
-
-.uploadBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 65.5px;
-  height: 27px;
-  border: none;
-  background: #e9ecef;
-  border-left: 0.5px solid #becad6;
-  font-family: "Roboto";
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  text-align: center;
-  letter-spacing: -0.175439px;
-  color: #495057;
-
-  &:hover,
-  &:focus {
-    border-color: #becad6;
-    color: #495057;
-    background: #f2f4f7;
-  }
-}
-
-.placeholder {
-  position: absolute;
-  top: 8px;
-  font-family: "Roboto";
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
-  letter-spacing: -0.175439px;
-  color: #495057;
-  padding-left: 13px;
-}
-
-.upload {
-  & [class~="ant-upload-select"] {
-    float: right;
-  }
-
-  & [class~="ant-upload-list"] {
-    float: left;
-    height: 29px;
-    font-family: "Roboto";
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 12px;
-    letter-spacing: -0.175439px;
-    color: #495057;
-    padding-left: 13px;
-
-    & [class~="ant-upload-list-item"] {
-      height: 27px;
-      margin: 0;
-    }
-
-    & [class~="ant-upload-text-icon"] {
-      display: none;
-    }
-
-    & [class~="ant-upload-list-item-name"] {
-      font-family: "Roboto";
-      font-weight: 400;
-      font-size: 10px;
-      line-height: 12px;
-      letter-spacing: -0.175439px;
-      color: #495057;
-      padding: 0;
-    }
-  }
-}
-
 .cardInfoTitle {
   font-family: "Roboto";
   font-weight: 500;
@@ -209,20 +127,28 @@
   color: var(--main-blue-light);
 }
 
-.checkboxGroup {
+.checkboxGroup,
+.radioGroup {
+  display: flex;
   flex-direction: column;
 }
 
 .checkbox {
+  display: flex;
   flex-direction: row;
 }
 
+.radioGroup {
+  gap: 8px;
+}
+
 .checkboxGroup,
-.checkbox {
-  display: flex;
+.checkbox,
+.radioGroup {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
+  white-space: nowrap;
 
   span {
     &:last-child {
@@ -272,18 +198,6 @@
   color: var(--main-black);
 }
 
-.plusBtn {
-  width: 30px;
-  height: 30px;
-  background: var(--main-white);
-  border: 1px solid #becad6;
-  border-radius: 4px;
-
-  & svg {
-    fill: #becad6;
-  }
-}
-
 .inputNumber {
   width: 100%;
   height: 29px;
@@ -323,6 +237,18 @@
     line-height: 12px;
     letter-spacing: -0.18421px;
     color: var(--main-black);
+  }
+
+  [class~="ant-radio-inner"] {
+    width: 14px;
+    height: 14px;
+  }
+
+  [class~="ant-picker"] {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #becad6;
+    border-radius: 4px;
   }
 }
 

@@ -1,11 +1,12 @@
-import { Button, Card, Col, Form, Row, Space, Typography } from 'antd';
+import { Card, Col, Form, Row, Space, Typography } from 'antd';
+import { EditableTable } from '../UI/EditableTable';
 import { Table } from '../UI/Table';
 import styles from './ListEntities.module.scss';
 
-const ListCars = (props) => {
+const ListEntities = (props) => {
   const { Title } = Typography;
-  const { title, form, tableProps } = props;
-  const { onChange, fields, filters, onReset, onApply } = form;
+  const { title, form, tableProps, isEditable = false } = props;
+  const { onChange, fields, filters, buttons } = form;
 
   return (
     <>
@@ -22,25 +23,15 @@ const ListCars = (props) => {
                 onChange(allFields);
               }}
               requiredMark="optional"
-              onFinish={onApply}
             >
-              <Col xs={16} sm={17}>
+              <Col xs={12} sm={14}>
                 <Space size={[15, 15]} wrap style={{ width: '100%' }}>
                   {filters}
                 </Space>
               </Col>
-              <Col xs={8} sm={7} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Col xs={12} sm={10} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Space size={[15, 15]} wrap>
-                  <Form.Item style={{ margin: 0 }}>
-                    <Button className={styles.resetBtn} onClick={onReset}>
-                      Сбросить
-                    </Button>
-                  </Form.Item>
-                  <Form.Item style={{ margin: 0 }}>
-                    <Button type="primary" htmlType="submit" className={styles.filterBtn}>
-                      Применить
-                    </Button>
-                  </Form.Item>
+                  {buttons}
                 </Space>
               </Col>
             </Form>
@@ -50,10 +41,10 @@ const ListCars = (props) => {
         className={styles.card}
         bodyStyle={{ padding: '1px 0px 0px' }}
       >
-        <Table {...tableProps} />
+        {isEditable ? <EditableTable {...tableProps} /> : <Table {...tableProps} />}
       </Card>
     </>
   );
 };
 
-export default ListCars;
+export default ListEntities;

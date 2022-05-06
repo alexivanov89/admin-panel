@@ -12,6 +12,7 @@ const axiosInstance = axios.create({
     'X-Api-Factory-Application-Id': API_KEY,
     'Access-Control-Allow-Credentials': true,
     Authorization: `Basic ${token}`,
+    'Content-Type': 'application/json',
   },
 });
 

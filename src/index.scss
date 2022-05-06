@@ -143,7 +143,7 @@ img {
 }
 
 a.ant-typography {
-  color: var(--main-blue) !important;
+  color: var(--main-blue);
 }
 
 .ant-input-group-addon {
@@ -253,7 +253,7 @@ h1.ant-typography {
 .ant-form-item-explain-error {
   font-family: "Helvetica";
   font-weight: 400;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 11px;
   letter-spacing: -0.175439px;
   color: var(--main-red);

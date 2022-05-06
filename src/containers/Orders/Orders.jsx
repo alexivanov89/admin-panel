@@ -1,6 +1,21 @@
-import { Button, Card, Col, Form, Row, Select, Space, Table, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import cn from 'classnames';
+import format from 'date-fns/format';
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  message,
+  Popconfirm,
+  Row,
+  Select,
+  Space,
+  Table,
+  Typography,
+} from 'antd';
 import {
   ApplyIcon,
   CheckboxOff,
@@ -17,10 +32,9 @@ import {
   fetchOrdersAsync,
   fetchOrderStatusAsync,
 } from '../../store/slices/tableSlice';
-import format from 'date-fns/format';
-import cn from 'classnames';
 import { Image } from '../../components/UI/Image';
 import NoFoto from '../../assets/img/noFoto.jpg';
+import { tableService } from '../../services/tableService';
 import { numberWithSpaces } from '../../utils/numberWithSpaces';
 import { getRequestParams } from '../../utils/getRequestParams';
 import styles from './Orders.module.scss';
@@ -36,8 +50,10 @@ const Orders = () => {
     car: { cars },
     orderStatus: { values },
   } = useSelector(({ table }) => table);
-  const { orders, loading, error } = order;
+  const { orders, loading } = order;
   const [page, setPage] = useState(1);
+  let { url } = useRouteMatch();
+  const history = useHistory();
 
   const dateDayAgo = new Date().getTime() - 1000 * 60 * 60 * 24;
   const dateWeekAgo = new Date().getTime() - 1000 * 60 * 60 * 24 * 7;
@@ -84,9 +100,7 @@ const Orders = () => {
       color,
       dateFrom,
       dateTo,
-      pointId,
       price,
-      orderStatusId,
       isFullTank,
       isNeedChildChair,
       isRightWheel,
@@ -116,6 +130,7 @@ const Orders = () => {
         apply: 'готово',
         delete: 'отмена',
         change: 'изменить',
+        order: order,
       },
     };
     return item;
@@ -214,15 +229,63 @@ const Orders = () => {
       render: (orderActions) => (
         <div className={styles.orderActions}>
           <ButtonGroup>
-            <Button icon={<ApplyIcon />} className={styles.apply}>
-              {orderActions?.apply}
-            </Button>
-            <Button icon={<CloseIcon />} className={styles.delete}>
-              {orderActions?.delete}
-            </Button>
-            <Button icon={<EditIcon />} className={styles.change}>
-              {orderActions?.change}
-            </Button>
+            <Popconfirm
+              placement="topRight"
+              title="Уверены, что хотите подтвердить заказ?"
+              onConfirm={() => {
+                tableService
+                  .putOrderById(orderActions?.order?.id, {
+                    ...orderActions?.order,
+                    orderStatusId: values.find(({ name }) => name === 'Подтвержденные'),
+                  })
+                  .then(() => {
+                    message.success(`Заказ успешно подтверждён.`);
+                  })
+                  .catch(() => message.error(`При отправке данных  произошла ошибка.`));
+              }}
+              cancelText="Отмена"
+            >
+              <Button icon={<ApplyIcon />} className={styles.apply}>
+                {orderActions?.apply}
+              </Button>
+            </Popconfirm>
+
+            <Popconfirm
+              placement="topRight"
+              title="Уверены, что хотите отменить заказ?"
+              onConfirm={() => {
+                tableService
+                  .putOrderById(orderActions?.order?.id, {
+                    ...orderActions?.order,
+                    orderStatusId: values.find(({ name }) => name === 'Отмененные'),
+                  })
+                  .then(() => {
+                    message.success(`Заказ успешно отменён.`);
+                  })
+                  .catch(() => message.error(`При отправке данных  произошла ошибка.`));
+              }}
+              cancelText="Отмена"
+            >
+              <Button icon={<CloseIcon />} className={styles.delete}>
+                {orderActions?.delete}
+              </Button>
+            </Popconfirm>
+
+            <Popconfirm
+              placement="topRight"
+              title="Уверены, что хотите изменить заказ?"
+              onConfirm={() => {
+                history.push({
+                  pathname: `${url}/${orderActions?.order?.id}`,
+                  state: { order: orderActions?.order },
+                });
+              }}
+              cancelText="Отмена"
+            >
+              <Button icon={<EditIcon />} className={styles.change}>
+                {orderActions?.change}
+              </Button>
+            </Popconfirm>
           </ButtonGroup>
         </div>
       ),
@@ -240,7 +303,7 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchOrdersAsync(`?createdAt[$gt]=${dateDayAgo}`));
+    dispatch(fetchOrdersAsync(getRequestParams(fieldsForm)));
   }, []);
 
   useEffect(() => {
@@ -272,13 +335,13 @@ const Orders = () => {
                 onChangeField(allFields);
               }}
               requiredMark="optional"
-              onFinish={(values) => {
+              onFinish={() => {
                 dispatch(fetchOrdersAsync(getRequestParams(fieldsForm)));
               }}
             >
               <Col xs={18} sm={20}>
                 <Space size={[15, 15]} wrap style={{ width: '100%' }}>
-                  <Form.Item name="period" style={{ margin: 0 }}>
+                  <Form.Item name="period" style={{ margin: '0px 0px 0px 2px' }}>
                     <Select
                       showSearch
                       placeholder="Период"
@@ -402,7 +465,6 @@ const Orders = () => {
             position: ['bottomCenter'],
             current: page,
             pageSize: 1,
-            // total: 6000,
             showSizeChanger: false,
             onChange: onChange,
             itemRender: itemRender,

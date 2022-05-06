@@ -82,22 +82,3 @@
   margin: 0;
   border-top: 1px solid #e5e5e5 !important;
 }
-
-.form {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  & [class~="ant-form-item-control-input"] {
-    min-height: 29px;
-  }
-
-  label {
-    font-family: "Helvetica";
-    font-weight: 400;
-    font-size: 10.5px;
-    line-height: 12px;
-    letter-spacing: -0.18421px;
-    color: var(--main-black);
-  }
-}
