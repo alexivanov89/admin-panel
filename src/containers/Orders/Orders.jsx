@@ -335,7 +335,7 @@ const Orders = () => {
                 onChangeField(allFields);
               }}
               requiredMark="optional"
-              onFinish={(values) => {
+              onFinish={() => {
                 dispatch(fetchOrdersAsync(getRequestParams(fieldsForm)));
               }}
             >

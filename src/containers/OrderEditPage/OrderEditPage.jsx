@@ -93,37 +93,51 @@ const OrderEditPage = () => {
   const optionsRates = rates;
 
   const screens = useBreakpoint();
-  const isSidebarOpen = screens.xl;
 
-  const configMessage = (message) => ({
-    content: (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <span>{message}</span>
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => {
-            message.destroy();
+  const messageCreate = (type, messageText) => {
+    const config = {
+      content: (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
           }}
-        />
-      </div>
-    ),
-    duration: 3,
-    className: styles.messageSuccess,
-    style: {
-      marginTop: '59.5px',
-      position: 'relative',
-      width: isSidebarOpen ? 'calc(100% - 285px)' : '100%',
-      left: isSidebarOpen ? '285px' : '0',
-    },
-    icon: <ApplyIcon className={styles.messageIcon} />,
-  });
+        >
+          <span>{messageText}</span>
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => {
+              message.destroy(messageText);
+            }}
+          />
+        </div>
+      ),
+      duration: 3,
+      key: messageText,
+      onClick: () => message.destroy(messageText),
+      style: {
+        marginTop: '59.5px',
+        position: 'relative',
+        width: screens.xl ? 'calc(100% - 285px)' : '100%',
+        left: screens.xl ? '285px' : '0',
+      },
+      icon: <ApplyIcon className={styles.messageIcon} />,
+    };
+    switch (type) {
+      case 'success':
+        message.success({ ...config, className: styles.messageSuccess });
+        break;
+      case 'error':
+        message.error({ ...config, className: styles.messageError });
+        break;
+
+      default:
+        message.success({ ...config, className: styles.messageSuccess });
+        break;
+    }
+  };
 
   const onFinish = () => {
     form
@@ -143,12 +157,14 @@ const OrderEditPage = () => {
         tableService
           .putOrderById(order?.id, prepareFieldsValue)
           .then(() => {
-            message.success(configMessage(`Успех! Заказ изменён`));
+            messageCreate('success', 'Успех! Заказ изменён');
           })
           .then(() => {
             history.goBack();
           })
-          .catch(() => message.error(configMessage(`При изменении Заказа  произошла ошибка`)));
+          .catch(() => {
+            messageCreate('error', 'При изменении заказа произошла ошибка');
+          });
       })
 
       .catch(() => {});
@@ -157,16 +173,18 @@ const OrderEditPage = () => {
   const onDelete = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(() => {
         tableService
           .deleteOrderById(order?.id)
           .then(() => {
-            message.success(configMessage(`Успех! Заказ удалён`));
+            messageCreate('success', 'Успех! Заказ удалён');
           })
           .then(() => {
             history.goBack();
           })
-          .catch(() => message.error(configMessage(`При удалении заказа  произошла ошибка`)));
+          .catch(() => {
+            messageCreate('error', 'При удалении заказа произошла ошибка');
+          });
       })
       .catch(() => {});
   };
@@ -189,12 +207,14 @@ const OrderEditPage = () => {
         tableService
           .postOrder(prepareFieldsValue)
           .then(() => {
-            message.success(configMessage(`Успех! Заказ создан`));
+            messageCreate('success', 'Успех! Заказ создан');
           })
           .then(() => {
             history.goBack();
           })
-          .catch(() => message.error(configMessage(`При создании Заказа  произошла ошибка`)));
+          .catch(() => {
+            messageCreate('error', 'При создании заказа произошла ошибка');
+          });
       })
       .catch(() => {});
   };

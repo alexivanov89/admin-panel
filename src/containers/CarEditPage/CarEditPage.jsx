@@ -38,7 +38,51 @@ const CarEditPage = () => {
     car: { cars },
   } = useSelector(({ table }) => table);
   const screens = useBreakpoint();
-  const isSidebarOpen = screens.xl;
+
+  const messageCreate = (type, messageText) => {
+    const config = {
+      content: (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <span>{messageText}</span>
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => {
+              message.destroy(messageText);
+            }}
+          />
+        </div>
+      ),
+      duration: 3,
+      key: messageText,
+      onClick: () => message.destroy(messageText),
+      style: {
+        marginTop: '59.5px',
+        position: 'relative',
+        width: screens.xl ? 'calc(100% - 285px)' : '100%',
+        left: screens.xl ? '285px' : '0',
+      },
+      icon: <ApplyIcon className={styles.messageIcon} />,
+    };
+    switch (type) {
+      case 'success':
+        message.success({ ...config, className: styles.messageSuccess });
+        break;
+      case 'error':
+        message.error({ ...config, className: styles.messageError });
+        break;
+
+      default:
+        message.success({ ...config, className: styles.messageSuccess });
+        break;
+    }
+  };
 
   const optionsCar = cars;
   const optionsCategory = categories;
@@ -66,36 +110,6 @@ const CarEditPage = () => {
   ];
   const [optionsColors, setOptionsColors] = useState(initialOptionsColors);
   const [categoryCar, setCategoryCar] = useState(null);
-
-  const configMessage = (message) => ({
-    content: (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <span>{message}</span>
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => {
-            message.destroy();
-          }}
-        />
-      </div>
-    ),
-    duration: 3,
-    className: styles.messageSuccess,
-    style: {
-      marginTop: '59.5px',
-      position: 'relative',
-      width: isSidebarOpen ? 'calc(100% - 285px)' : '100%',
-      left: isSidebarOpen ? '285px' : '0',
-    },
-    icon: <ApplyIcon className={styles.messageIcon} />,
-  });
 
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -202,7 +216,7 @@ const CarEditPage = () => {
   const onFinish = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(() => {
         const prepareValues = {
           priceMin: form.getFieldValue('priceMin'),
           priceMax: form.getFieldValue('priceMax'),
@@ -224,10 +238,12 @@ const CarEditPage = () => {
             form.resetFields();
           })
           .then(() => {
-            message.success(configMessage('Успех! Машина сохранена'));
+            messageCreate('success', 'Успех! Машина сохранена');
             dispatch(fetchCarAsync());
           })
-          .catch(() => message.error(configMessage(`При сохранении машины  произошла ошибка.`)));
+          .catch(() => {
+            messageCreate('error', 'При сохранении машины произошла ошибка');
+          });
       })
 
       .catch(() => {});
@@ -241,18 +257,20 @@ const CarEditPage = () => {
   const onDelete = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(() => {
         tableService
           .deleteCarById(id)
           .then(() => {
             form.resetFields();
           })
           .then(() => {
-            message.success(configMessage('Успех! Машина удалена'));
+            messageCreate('success', 'Успех! Машина удалена');
             setId(null);
             dispatch(fetchCarAsync());
           })
-          .catch(() => message.error(configMessage(`При удалении машины  произошла ошибка.`)));
+          .catch(() => {
+            messageCreate('error', 'При удалении машины произошла ошибка');
+          });
       })
       .catch(() => {});
   };
@@ -260,7 +278,7 @@ const CarEditPage = () => {
   const onCreate = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(() => {
         const prepareValues = {
           priceMin: form.getFieldValue('priceMin'),
           priceMax: form.getFieldValue('priceMax'),
@@ -282,10 +300,12 @@ const CarEditPage = () => {
             form.resetFields();
           })
           .then(() => {
-            message.success(configMessage('Успех! Машина создана'));
+            messageCreate('success', 'Успех! Машина создана');
             dispatch(fetchCarAsync());
           })
-          .catch(() => message.error(configMessage(`При создании машины  произошла ошибка.`)));
+          .catch(() => {
+            messageCreate('error', 'При создании машины произошла ошибка');
+          });
       })
       .catch(() => {});
   };
