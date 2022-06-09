@@ -267,7 +267,7 @@ const MainPage = () => {
               </Space>
             </Col>
             <Col xs={12} sm={8} style={{ textAlign: 'end' }} className={styles.copyright}>
-              Copyright © 2020 Simbirsoft
+              Copyright © 2020
             </Col>
           </Row>
         </Footer>
