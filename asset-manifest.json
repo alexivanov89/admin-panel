@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/admin-panel/static/css/main.2cbad74b.css",
-    "main.js": "/admin-panel/static/js/main.29768d93.js",
+    "main.js": "/admin-panel/static/js/main.fa2e6505.js",
     "static/css/924.19e248bc.chunk.css": "/admin-panel/static/css/924.19e248bc.chunk.css",
     "static/js/924.87d9f37b.chunk.js": "/admin-panel/static/js/924.87d9f37b.chunk.js",
     "static/css/198.f634755c.chunk.css": "/admin-panel/static/css/198.f634755c.chunk.css",
-    "static/js/198.6657ec29.chunk.js": "/admin-panel/static/js/198.6657ec29.chunk.js",
+    "static/js/198.be2cb5e1.chunk.js": "/admin-panel/static/js/198.be2cb5e1.chunk.js",
     "static/css/107.61d31707.chunk.css": "/admin-panel/static/css/107.61d31707.chunk.css",
     "static/js/107.6f4cde72.chunk.js": "/admin-panel/static/js/107.6f4cde72.chunk.js",
     "static/css/139.0f5c45f8.chunk.css": "/admin-panel/static/css/139.0f5c45f8.chunk.css",
@@ -115,15 +115,15 @@
     "static/media/Orders.svg": "/admin-panel/static/media/Orders.1ea3b860d29c88fe8f8d2534c561f106.svg",
     "static/media/PrevIcon.svg": "/admin-panel/static/media/PrevIcon.e615e59502f5df5003b68f50678b7f87.svg",
     "static/media/DropdownIcon.svg": "/admin-panel/static/media/DropdownIcon.58280185c79a1d56a0fead96432c2ba9.svg",
-    "static/media/CloseIcon.svg": "/admin-panel/static/media/CloseIcon.f2663c682bdb0da08ae39cbfae7c2628.svg",
-    "static/media/ApplyIcon.svg": "/admin-panel/static/media/ApplyIcon.000fc7609286ea5f5a029ab27de990ec.svg",
+    "static/media/CloseIcon.svg": "/admin-panel/static/media/CloseIcon.b9c201e6cfb2de34d863f1e0ee0e0471.svg",
+    "static/media/ApplyIcon.svg": "/admin-panel/static/media/ApplyIcon.a62a51d1862b70eab8299751bb3317e5.svg",
     "static/media/CheckboxOff.svg": "/admin-panel/static/media/CheckboxOff.abc0c92fb2170ae7d8fe1ee3287449f2.svg",
     "main.2cbad74b.css.map": "/admin-panel/static/css/main.2cbad74b.css.map",
-    "main.29768d93.js.map": "/admin-panel/static/js/main.29768d93.js.map",
+    "main.fa2e6505.js.map": "/admin-panel/static/js/main.fa2e6505.js.map",
     "924.19e248bc.chunk.css.map": "/admin-panel/static/css/924.19e248bc.chunk.css.map",
     "924.87d9f37b.chunk.js.map": "/admin-panel/static/js/924.87d9f37b.chunk.js.map",
     "198.f634755c.chunk.css.map": "/admin-panel/static/css/198.f634755c.chunk.css.map",
-    "198.6657ec29.chunk.js.map": "/admin-panel/static/js/198.6657ec29.chunk.js.map",
+    "198.be2cb5e1.chunk.js.map": "/admin-panel/static/js/198.be2cb5e1.chunk.js.map",
     "107.61d31707.chunk.css.map": "/admin-panel/static/css/107.61d31707.chunk.css.map",
     "107.6f4cde72.chunk.js.map": "/admin-panel/static/js/107.6f4cde72.chunk.js.map",
     "139.0f5c45f8.chunk.css.map": "/admin-panel/static/css/139.0f5c45f8.chunk.css.map",
@@ -160,6 +160,6 @@
   },
   "entrypoints": [
     "static/css/main.2cbad74b.css",
-    "static/js/main.29768d93.js"
+    "static/js/main.fa2e6505.js"
   ]
 }
